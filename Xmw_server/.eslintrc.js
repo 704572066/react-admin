@@ -22,5 +22,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'simple-import-sort/imports': 'error', // import排序 npm包需在引入最顶部排序规则
+    'prettier/prettier': 'off'
   },
 };
