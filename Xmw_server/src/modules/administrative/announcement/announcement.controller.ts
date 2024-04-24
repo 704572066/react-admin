@@ -57,7 +57,7 @@ const eventEmitter = new EventEmitter();
 @ApiBearerAuth()
 @Controller('administrative/announcement')
 export class AnnouncementController {
-  constructor(private readonly announcementService: AnnouncementService) { }
+  constructor(private readonly announcementService: AnnouncementService) {}
 
   /**
    * @description: 获取活动公告列表

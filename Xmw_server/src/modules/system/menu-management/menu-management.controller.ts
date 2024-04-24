@@ -48,7 +48,7 @@ import { MenuManagementService } from './menu-management.service'; // MenuManage
 @ApiBearerAuth()
 @Controller('system/menu-management')
 export class MenuManagementController {
-  constructor(private readonly menuManagementService: MenuManagementService) { }
+  constructor(private readonly menuManagementService: MenuManagementService) {}
 
   /**
    * @description: 获取菜单管理列表

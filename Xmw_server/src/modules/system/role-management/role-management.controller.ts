@@ -50,7 +50,7 @@ import { RoleManagementService } from './role-management.service'; // RoleManage
 @ApiBearerAuth()
 @Controller('system/role-management')
 export class RoleManagementController {
-  constructor(private readonly roleManagementService: RoleManagementService) { }
+  constructor(private readonly roleManagementService: RoleManagementService) {}
 
   /**
    * @description: 获取角色管理列表

@@ -17,7 +17,8 @@ import type { LogsAttributes } from '@/utils/types/system';
 @Table({ tableName: 'xmw_logs' })
 export class XmwLogs
   extends Model<LogsAttributes, LogsAttributes>
-  implements LogsAttributes {
+  implements LogsAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

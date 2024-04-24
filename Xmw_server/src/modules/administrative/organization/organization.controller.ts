@@ -48,7 +48,7 @@ import { OrganizationService } from './organization.service'; // Organization Se
 @ApiBearerAuth()
 @Controller('administrative/organization')
 export class OrganizationController {
-  constructor(private readonly organizationService: OrganizationService) { }
+  constructor(private readonly organizationService: OrganizationService) {}
 
   /**
    * @description: 获取组织管理列表

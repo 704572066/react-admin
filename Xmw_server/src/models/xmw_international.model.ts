@@ -24,7 +24,8 @@ import type { InternationalAttributes } from '@/utils/types/system';
 @Table({ tableName: 'xmw_international', underscored: false })
 export class XmwInternational
   extends Model<InternationalAttributes, InternationalAttributes>
-  implements InternationalAttributes {
+  implements InternationalAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

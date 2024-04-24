@@ -29,4 +29,4 @@ import { RoleManagementService } from './role-management.service'; // RoleManage
   // 如果你这个模块中的provider 要在别的模块中使用 你必须要在这里声明 导出这些provider
   exports: [RoleManagementService],
 })
-export class RoleManagementModule { }
+export class RoleManagementModule {}

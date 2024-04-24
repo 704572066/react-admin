@@ -29,4 +29,4 @@ import { AnnouncementService } from './announcement.service'; // Announcement Se
   // 如果你这个模块中的provider 要在别的模块中使用 你必须要在这里声明 导出这些provider
   exports: [AnnouncementService],
 })
-export class AnnouncementModule { }
+export class AnnouncementModule {}

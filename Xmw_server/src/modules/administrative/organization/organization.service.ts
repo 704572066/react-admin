@@ -25,7 +25,7 @@ export class OrganizationService {
     @InjectModel(XmwOrganization)
     private readonly organizationModel: typeof XmwOrganization,
     private readonly operationLogsService: OperationLogsService,
-  ) { }
+  ) {}
 
   /**
    * @description: 获取组织管理列表

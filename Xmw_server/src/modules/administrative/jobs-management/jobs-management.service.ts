@@ -26,7 +26,7 @@ export class JobsManagementService {
     @InjectModel(XmwJobs)
     private readonly jobsModel: typeof XmwJobs,
     private readonly operationLogsService: OperationLogsService,
-  ) { }
+  ) {}
 
   /**
    * @description: 获取国际化列表

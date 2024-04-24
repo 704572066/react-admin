@@ -18,4 +18,4 @@ import { RedisCacheService } from './redis-cache.service'; // RedisCache Service
   providers: [RedisCacheService],
   exports: [RedisCacheService],
 })
-export class RedisCacheModule { }
+export class RedisCacheModule {}

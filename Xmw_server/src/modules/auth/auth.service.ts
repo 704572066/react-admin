@@ -42,7 +42,7 @@ export class AuthService {
     private readonly redisCacheService: RedisCacheService,
     private sequelize: Sequelize,
     private readonly operationLogsService: OperationLogsService,
-  ) { }
+  ) {}
 
   /**
    * @description: 用户登录

@@ -49,7 +49,7 @@ import { InternationalService } from './international.service'; // International
 @ApiBearerAuth()
 @Controller('system/internationalization')
 export class InternationalController {
-  constructor(private readonly internationalService: InternationalService) { }
+  constructor(private readonly internationalService: InternationalService) {}
   /**
    * @description: 获取当前语言的国际化数据
    * @author: 白雾茫茫丶
@@ -71,9 +71,8 @@ export class InternationalController {
   @ApiOkResponse({ type: ResponseInternationalDto })
   @ApiOperation({ summary: '获取国际化列表' })
   async getInternationalList(@Query() internationalInfo: ListInternationalDto) {
-    const response = await this.internationalService.getInternationalList(
-      internationalInfo,
-    );
+    const response =
+      await this.internationalService.getInternationalList(internationalInfo);
     return response;
   }
 

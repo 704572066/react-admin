@@ -50,7 +50,7 @@ import { UserManagementService } from './user-management.service'; // UserManage
 @ApiBearerAuth()
 @Controller('system/user-management')
 export class UserManagementController {
-  constructor(private readonly userManagementService: UserManagementService) { }
+  constructor(private readonly userManagementService: UserManagementService) {}
 
   /**
    * @description: 获取用户管理列表

@@ -28,7 +28,7 @@ export class ContextTrace {
     public readonly path?: string,
     public readonly lineNumber?: number,
     public readonly columnNumber?: number,
-  ) { }
+  ) {}
 }
 
 Log4js.addLayout('Awesome-nest', (logConfig: any) => {

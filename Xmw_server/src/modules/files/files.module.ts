@@ -66,4 +66,4 @@ const audio = ['mp3', 'wav', 'ogg'];
   controllers: [FilesController],
   providers: [FilesService],
 })
-export class FilesModule { }
+export class FilesModule {}

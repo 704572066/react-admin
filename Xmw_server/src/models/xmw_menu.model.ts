@@ -31,7 +31,8 @@ import type { MenuAttributes } from '@/utils/types/system';
 @Table({ tableName: 'xmw_menu', underscored: false })
 export class XmwMenu
   extends Model<MenuAttributes, MenuAttributes>
-  implements MenuAttributes {
+  implements MenuAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

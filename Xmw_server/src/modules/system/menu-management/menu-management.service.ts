@@ -31,7 +31,7 @@ export class MenuManagementService {
     private readonly internationaModel: typeof XmwInternational,
     private sequelize: Sequelize,
     private readonly operationLogsService: OperationLogsService,
-  ) { }
+  ) {}
 
   /**
    * @description: 获取菜单列表

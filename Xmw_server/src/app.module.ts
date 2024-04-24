@@ -55,4 +55,4 @@ import RedisConfig from './config/redis'; // redis配置
     AnnouncementModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

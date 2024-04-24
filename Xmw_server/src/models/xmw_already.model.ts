@@ -15,7 +15,8 @@ import type { AlreadyAttributes } from '@/utils/types/administrative';
 @Table({ tableName: 'xmw_already' })
 export class XmwAlready
   extends Model<AlreadyAttributes, AlreadyAttributes>
-  implements AlreadyAttributes {
+  implements AlreadyAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

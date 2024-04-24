@@ -25,4 +25,4 @@ import { JobsManagementService } from './jobs-management.service'; // JobsManage
   // 如果你这个模块中的provider 要在别的模块中使用 你必须要在这里声明 导出这些provider
   exports: [JobsManagementService],
 })
-export class JobsManagementModule { }
+export class JobsManagementModule {}

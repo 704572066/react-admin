@@ -8,8 +8,8 @@
  */
 import { ListRoleManagementDto } from './list.role-management.dto'; // 查询角色管理列表参数 Dto
 import {
-  ResponseRoleManagementDto,
   CreateRoleManagementDto,
+  ResponseRoleManagementDto,
 } from './response.role-management.dto'; // 查询角色管理列表参数 Dto
 import {
   SaveRoleManagementDto,

@@ -64,8 +64,9 @@ export class FilesController {
   uploadFile(
     @UploadedFile() file: Express.Multer.File,
   ): Response<Express.Multer.File> {
-    file.path = `http://${process.env.APP_HOST}:${process.env.APP_PROT
-      }/static${file.path.replace(/\\/g, '/').replace(/upload/g, '')}`;
+    file.path = `http://${process.env.APP_HOST}:${
+      process.env.APP_PROT
+    }/static${file.path.replace(/\\/g, '/').replace(/upload/g, '')}`;
     return responseMessage(file);
   }
 

@@ -25,7 +25,8 @@ import type { JobsAttributes } from '@/utils/types/administrative';
 @Table({ tableName: 'xmw_jobs' })
 export class XmwJobs
   extends Model<JobsAttributes, JobsAttributes>
-  implements JobsAttributes {
+  implements JobsAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

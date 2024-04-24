@@ -9,4 +9,4 @@
 import { Controller } from '@nestjs/common';
 
 @Controller()
-export class RedisCacheController { }
+export class RedisCacheController {}

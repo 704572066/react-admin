@@ -9,4 +9,4 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class FilesService { }
+export class FilesService {}

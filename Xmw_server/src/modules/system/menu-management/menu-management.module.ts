@@ -29,4 +29,4 @@ import { MenuManagementService } from './menu-management.service'; // MenuManage
   // 如果你这个模块中的provider 要在别的模块中使用 你必须要在这里声明 导出这些provider
   exports: [MenuManagementService],
 })
-export class MenuManagementModule { }
+export class MenuManagementModule {}

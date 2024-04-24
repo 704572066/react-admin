@@ -28,7 +28,8 @@ import type { UserAttributes } from '@/utils/types/system';
 @Table({ tableName: 'xmw_user' })
 export class XmwUser
   extends Model<UserAttributes, UserAttributes>
-  implements UserAttributes {
+  implements UserAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

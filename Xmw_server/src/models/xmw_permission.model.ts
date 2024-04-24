@@ -23,7 +23,8 @@ import type { PermissionAttributes } from '@/utils/types/system';
 @Table({ tableName: 'xmw_permission' })
 export class XmwPermission
   extends Model<PermissionAttributes, PermissionAttributes>
-  implements PermissionAttributes {
+  implements PermissionAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

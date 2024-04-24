@@ -24,7 +24,8 @@ import type { OrgAttributes } from '@/utils/types/administrative';
 @Table({ tableName: 'xmw_organization' })
 export class XmwOrganization
   extends Model<OrgAttributes, OrgAttributes>
-  implements OrgAttributes {
+  implements OrgAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @Column({

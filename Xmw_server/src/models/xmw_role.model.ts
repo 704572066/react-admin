@@ -26,7 +26,8 @@ import type { RoleAttributes } from '@/utils/types/system';
 @Table({ tableName: 'xmw_role' })
 export class XmwRole
   extends Model<RoleAttributes, RoleAttributes>
-  implements RoleAttributes {
+  implements RoleAttributes
+{
   @IsUUID(4)
   @PrimaryKey
   @ForeignKey(() => XmwPermission)

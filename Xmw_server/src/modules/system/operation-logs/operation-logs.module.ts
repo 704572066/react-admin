@@ -16,4 +16,4 @@ import { OperationLogsService } from './operation-logs.service'; // OperationLog
   // 如果你这个模块中的provider 要在别的模块中使用 你必须要在这里声明 导出这些provider
   exports: [OperationLogsService],
 })
-export class OperationLogsModule { }
+export class OperationLogsModule {}

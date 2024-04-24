@@ -29,7 +29,7 @@ export class InternationalService {
     private readonly internationaModel: typeof XmwInternational,
     private sequelize: Sequelize,
     private readonly operationLogsService: OperationLogsService,
-  ) { }
+  ) {}
 
   /**
    * @description: 获取当前语言的国际化数据
@@ -93,8 +93,8 @@ export class InternationalService {
     return responseMessage(
       isMenu
         ? result.filter(
-          (element: XmwInternational) => element.name == 'menu',
-        )[0].children
+            (element: XmwInternational) => element.name == 'menu',
+          )[0].children
         : result,
     );
   }

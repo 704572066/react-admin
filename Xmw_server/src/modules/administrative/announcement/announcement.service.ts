@@ -37,7 +37,7 @@ export class AnnouncementService {
     @InjectModel(XmwAlready)
     private readonly alreadyModel: typeof XmwAlready,
     private sequelize: Sequelize,
-  ) { }
+  ) {}
 
   /**
    * @description: 获取活动公告列表
@@ -124,8 +124,8 @@ export class AnnouncementService {
     // 判断是新增还是更新
     const result = announcement_id
       ? await this.announcementModel.update(announcementInfo, {
-        where: { announcement_id },
-      })
+          where: { announcement_id },
+        })
       : await this.announcementModel.create({ user_id, ...announcementInfo });
     // 保存操作日志
     await this.operationLogsService.saveLogs(
@@ -173,7 +173,8 @@ export class AnnouncementService {
     // 根据主键查找出当前数据
     const currentInfo = await this.announcementModel.findByPk(announcement_id);
     await this.operationLogsService.saveLogs(
-      `更新【${currentInfo.title}】是否置顶状态：${{ 0: '否', 1: '是' }[pinned]
+      `更新【${currentInfo.title}】是否置顶状态：${
+        { 0: '否', 1: '是' }[pinned]
       }`,
     );
     return responseMessage(result);

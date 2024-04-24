@@ -48,7 +48,7 @@ import { JobsManagementService } from './jobs-management.service'; // JobsManage
 @ApiBearerAuth()
 @Controller('administrative/jobs-management')
 export class JobsManagementController {
-  constructor(private readonly jobsManagementService: JobsManagementService) { }
+  constructor(private readonly jobsManagementService: JobsManagementService) {}
 
   /**
    * @description: 获取岗位管理列表

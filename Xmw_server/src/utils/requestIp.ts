@@ -7,14 +7,13 @@
  * @LastEditTime: 2022-11-25 17:06:24
  */
 
-import { createParamDecorator, ExecutionContext } from '@nestjs/common'
-
-import * as requestIp from 'request-ip'
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import * as requestIp from 'request-ip';
 
 export const IpAddress = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
-    const req = ctx.switchToHttp().getRequest()
-    if (req.clientIp)
-      return req.clientIp;
+    const req = ctx.switchToHttp().getRequest();
+    if (req.clientIp) return req.clientIp;
     return requestIp.getClientIp(req);
-  })
+  },
+);
