@@ -116,10 +116,7 @@ const SystemSchema = new mongoose.Schema({
 });
 
 export const App = mongoose.models['app'] || mongoose.model('app', appSchema);
-export const DataSet =
-  mongoose.models['dataset'] || mongoose.model('dataset', datasetSchema);
-export const User =
-  mongoose.models['user'] || mongoose.model('user', UserSchema);
+export const DataSet = mongoose.models['dataset'] || mongoose.model('dataset', datasetSchema);
+export const User = mongoose.models['user'] || mongoose.model('user', UserSchema);
 export const Pay = mongoose.models['pay'] || mongoose.model('pay', paySchema);
-export const System =
-  mongoose.models['system'] || mongoose.model('system', SystemSchema);
+export const System = mongoose.models['system'] || mongoose.model('system', SystemSchema);
