@@ -108,3 +108,8 @@ export const checkDirAndCreate = (filePath: string): void => {
     }
   }
 };
+
+export const PRICE_SCALE = 100000;
+export const formatPrice = (val = 0, multiple = 1) => {
+  return Number(((val / PRICE_SCALE) * multiple).toFixed(10));
+};

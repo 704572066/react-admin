@@ -60,6 +60,7 @@ export enum ROUTES {
   ROLEMANAGEMENT = '/system/role-management', // 系统设置-角色管理
   INTERNATIONALIZATION = '/system/internationalization', // 系统设置-国际化
   OPERATIONLOG = '/system/operation-log', // 系统设置-操作日志
+  GPTUSERMANAGEMENT = '/gpt/user-management', // gpt-用户管理
 }
 
 /**

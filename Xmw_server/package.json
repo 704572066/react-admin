@@ -58,7 +58,8 @@
     "svg-captcha": "^1.4.0",
     "swagger-ui-express": "^5.0.0",
     "dotenv": "^16.1.4",
-    "mongoose": "^7.2.2"
+    "mongoose": "^7.2.2",
+    "dayjs": "^1.11.8"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.1.18",
