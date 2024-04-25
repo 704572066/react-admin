@@ -7,20 +7,20 @@
  * @LastEditTime: 2023-03-17 16:50:12
  */
 export default {
-  path: '/gpt',
-  name: 'gpt',
+  path: '/ai-console',
+  name: 'ai-console',
   access: 'adminRouteFilter',
   exact: true,
   routes: [
     {
-      path: '/gpt',
-      redirect: '/gpt/user-management',
+      path: '/ai-console',
+      redirect: '/ai-console/gpt-user-management',
       exact: true,
     },
     {
-      path: '/gpt/user-management',
-      name: 'user-management',
-      component: './GPT/UserManagement',
+      path: '/ai-console/gpt-user-management',
+      name: 'gpt-user-management',
+      component: './AIConsole/GPTUserManagement',
       access: 'adminRouteFilter',
       exact: true,
     },

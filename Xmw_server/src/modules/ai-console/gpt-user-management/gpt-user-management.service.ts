@@ -8,7 +8,7 @@
  */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import { Op } from 'sequelize';
 import type { WhereOptions } from 'sequelize/types';
 
@@ -43,7 +43,7 @@ export class UserManagementService {
    */
   async getUserList(
     userInfo: ListUserManagementDto,
-  ): Promise<Response<PageResponse<XmwUser>>> {
+  ): Promise<Response<PageResponse<any>>> {
     // 解构参数
     // const { user_name, sex, status, start_time, end_time, pageSize, current } =
     //   userInfo;

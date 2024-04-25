@@ -15,7 +15,7 @@ import { FC } from 'react';
 
 import StrengthMeter from '@/components/StrengthMeter' // 密码强度校验
 import { renderFormTitle } from '@/components/TableColumns'
-import { createUser, updateUser } from '@/services/gpt/user-management'
+import { createUser, updateUser } from '@/services/ai-console/gpt-user-management'
 import { encryptionAesPsd, formatPerfix, isSuccess } from '@/utils'
 import { ROUTES } from '@/utils/enums'
 import type { FormTemplateProps } from '@/utils/types/system/user-management'

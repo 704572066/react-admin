@@ -23,7 +23,7 @@ const Settings: LayoutSettings & {
   fixedHeader: true,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Xmw Admin',
+  title: 'GPT Admin',
   pwa: false,
   logo: '/logo.svg',
   iconfontUrl: '/favicon.ico',

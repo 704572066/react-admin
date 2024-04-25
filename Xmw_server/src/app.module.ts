@@ -13,6 +13,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { AnnouncementModule } from '@/modules/administrative/announcement/announcement.module'; // 智能行政-活动公告
 import { JobsManagementModule } from '@/modules/administrative/jobs-management/jobs-management.module'; // 智能行政-岗位管理
 import { OrganizationModule } from '@/modules/administrative/organization/organization.module'; // 智能行政-组织管理
+import { GPTUserManagementModule } from '@/modules/ai-console/gpt-user-management/gpt-user-management.module'; // GPT-用户管理
 import { AuthModule } from '@/modules/auth/auth.module'; // 用户鉴权
 import { FilesModule } from '@/modules/files/files.module'; // 文件上传
 import { RedisCacheModule } from '@/modules/redis-cache/redis-cache.module'; // redis 缓存
@@ -53,6 +54,7 @@ import RedisConfig from './config/redis'; // redis配置
     AuthModule,
     RedisCacheModule,
     AnnouncementModule,
+    GPTUserManagementModule,
   ],
 })
 export class AppModule {}

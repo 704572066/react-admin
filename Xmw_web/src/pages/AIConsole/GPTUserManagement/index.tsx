@@ -11,7 +11,7 @@ import type { FC } from 'react';
 
 import TableTemplate from './components/TableTemplate'
 
-const UserManagement: FC = () => {
+const GPTUserManagement: FC = () => {
     return (
         <PageContainer header={{ title: null }}>
             {/* 表格列表 */}
@@ -19,4 +19,4 @@ const UserManagement: FC = () => {
         </PageContainer>
     )
 }
-export default UserManagement
+export default GPTUserManagement

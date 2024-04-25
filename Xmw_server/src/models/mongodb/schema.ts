@@ -1,7 +1,8 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.development.env' });
 
 const mongoUrl = process.env.MONGODB_URI;
 const mongoDBName = process.env.MONGODB_NAME;

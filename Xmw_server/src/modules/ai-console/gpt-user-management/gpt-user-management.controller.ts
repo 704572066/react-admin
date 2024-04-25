@@ -32,7 +32,7 @@ import {
   SaveUserManagementDto,
   UpdateUserStatusDto,
 } from './dto';
-import { UserManagementService } from './user-management.service'; // UserManagement Service
+import { UserManagementService } from './gpt-user-management.service'; // UserManagement Service
 
 /* swagger 文档 */
 @ApiTags('知识库-用户管理')
@@ -42,8 +42,8 @@ import { UserManagementService } from './user-management.service'; // UserManage
   description: 'token令牌',
 })
 @ApiBearerAuth()
-@Controller('gpt/user-management')
-export class UserManagementController {
+@Controller('ai-console/gpt-user-management')
+export class GPTUserManagementController {
   constructor(private readonly userManagementService: UserManagementService) {}
 
   /**
@@ -130,4 +130,5 @@ export class UserManagementController {
     );
     return response;
   }
+
 }

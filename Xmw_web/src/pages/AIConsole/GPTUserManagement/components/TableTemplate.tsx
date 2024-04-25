@@ -25,7 +25,7 @@ import {
 	sortColumn,
 	statusColumn,
 } from '@/components/TableColumns'
-import { delUser, getUserList, setUserStatus } from '@/services/gpt/user-management' // 用户管理接口
+import { delUser, getUserList, setUserStatus } from '@/services/ai-console/gpt-user-management' // 用户管理接口
 import { decryptionAesPsd, formatPerfix, formatResponse, renderColumnsStateMap } from '@/utils'
 import { IconFont } from '@/utils/const'
 import { INTERNATION, ROUTES, SEX, STATUS } from '@/utils/enums'
@@ -114,8 +114,16 @@ const TableTemplate: FC = () => {
 			align: 'center',
 		},
 		{
-			title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'user_name') }),
-			dataIndex: 'user_name',
+			title: formatMessage({ id: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'id') }),
+			dataIndex: '_id',
+			hideInSearch: true,
+			ellipsis: true,
+			align: 'center',
+			width: 120,
+		},
+		{
+			title: formatMessage({ id: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'user_name') }),
+			dataIndex: 'username',
 			ellipsis: true,
 			width: 100,
 			align: 'center',
@@ -125,14 +133,6 @@ const TableTemplate: FC = () => {
 					{text}
 				</Tag>
 			</Space>,
-		},
-		{
-			title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'cn_name') }),
-			dataIndex: 'cn_name',
-			hideInSearch: true,
-			ellipsis: true,
-			align: 'center',
-			width: 80,
 		},
 		// {
 		// 	title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'en_name') }),
@@ -144,8 +144,8 @@ const TableTemplate: FC = () => {
 		// },
 		{
 			title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'avatar_url') }),
-			dataIndex: 'avatar_url',
-			key: 'avatar_url',
+			dataIndex: 'avatar',
+			key: 'avatar',
 			valueType: 'image',
 			width: 80,
 			hideInSearch: true,
@@ -191,20 +191,20 @@ const TableTemplate: FC = () => {
 		// 	align: 'center',
 		// 	width: 80,
 		// },
-		{
-			title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'role_id') }),
-			dataIndex: 'role_name',
-			hideInSearch: true,
-			ellipsis: true,
-			width: 120,
-			align: 'center',
-			render: (text) => <Space>
-				<Tag
-					icon={<IconFont type="icon-role-management" className={PrimaryColor} />} >
-					{text}
-				</Tag>
-			</Space>,
-		},
+		// {
+		// 	title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'role_id') }),
+		// 	dataIndex: 'role_name',
+		// 	hideInSearch: true,
+		// 	ellipsis: true,
+		// 	width: 120,
+		// 	align: 'center',
+		// 	render: (text) => <Space>
+		// 		<Tag
+		// 			icon={<IconFont type="icon-role-management" className={PrimaryColor} />} >
+		// 			{text}
+		// 		</Tag>
+		// 	</Space>,
+		// },
 		// {
 		// 	title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'org_id') }),
 		// 	dataIndex: 'org_name',
@@ -233,22 +233,22 @@ const TableTemplate: FC = () => {
 		// 		</Tag>
 		// 	</Space>,
 		// },
-		// {
-		// 	title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'age') }),
-		// 	dataIndex: 'age',
-		// 	hideInSearch: true,
-		// 	ellipsis: true,
-		// 	align: 'center',
-		// 	width: 60,
-		// },
-		// {
-		// 	title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'phone') }),
-		// 	dataIndex: 'phone',
-		// 	hideInSearch: true,
-		// 	width: 100,
-		// 	ellipsis: true,
-		// 	align: 'center',
-		// },
+		{
+			title: formatMessage({ id: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'balance') }),
+			dataIndex: 'balance',
+			hideInSearch: true,
+			ellipsis: true,
+			align: 'center',
+			width: 60,
+		},
+		{
+			title: formatMessage({ id: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'create_time') }),
+			dataIndex: 'createTime',
+			hideInSearch: true,
+			width: 100,
+			ellipsis: true,
+			align: 'center',
+		},
 		// {
 		// 	title: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'email') }),
 		// 	dataIndex: 'email',
@@ -265,7 +265,7 @@ const TableTemplate: FC = () => {
 		/* 排序 */
 		sortColumn,
 		/* 创建时间 */
-		createTimeColumn,
+		// createTimeColumn,
 		/* 创建时间-搜索 */
 		createTimeInSearch,
 		{
