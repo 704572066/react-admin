@@ -26,6 +26,7 @@ import { UserManagementModule } from '@/modules/system/user-management/user-mana
 import App_globalConfig from './config/configuration'; // 全局配置
 import DatabaseConfig from './config/database'; // 数据库配置
 import RedisConfig from './config/redis'; // redis配置
+import { PrismaModule } from './npx/prisma/prisma.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import RedisConfig from './config/redis'; // redis配置
     RedisCacheModule,
     AnnouncementModule,
     GPTUserManagementModule,
+    PrismaModule,
   ],
 })
 export class AppModule {}

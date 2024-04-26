@@ -8,6 +8,7 @@
  */
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { PrismaModule } from 'src/npx/prisma/prisma.module';
 
 import { XmwUser } from '@/models/xmw_user.model'; // xmw_user 实体
 import { OperationLogsModule } from '@/modules/system/operation-logs/operation-logs.module'; // 系统设置-操作日志
@@ -17,7 +18,7 @@ import { UserManagementService } from './gpt-user-management.service'; // UserMa
 
 @Module({
   // 将实体 导入到这个module中，以便你这个module中的其它provider使用
-  imports: [SequelizeModule.forFeature([XmwUser]), OperationLogsModule],
+  imports: [SequelizeModule.forFeature([XmwUser]), OperationLogsModule, PrismaModule],
   // 由 Nest 注入器实例化的提供者，并且可以至少在整个模块中共享
   controllers: [GPTUserManagementController],
   // 通过 @Module 装饰器映射 Crotroller

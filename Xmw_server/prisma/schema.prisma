@@ -14,11 +14,16 @@ datasource db {
 }
 
 
-model User {
+model users {
+  id String  @id @map("_id")
+  status String
   username  String
   password  String
-  createTime  DateTime
   avatar  String
   balance Int
-  }
+  promotionRate Int
+  timezone  String
+  createTime  DateTime
+  version String?  @map("_v")
+  openaiAccount String?
 }

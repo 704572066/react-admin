@@ -8,14 +8,16 @@
  */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { PrismaClient } from '@prisma/client';
 import * as dayjs from 'dayjs';
 import { Op } from 'sequelize';
 import type { WhereOptions } from 'sequelize/types';
+import { PrismaService } from 'src/npx/prisma/prisma.service';
 
 import { User } from '@/models/mongodb/schema';
-import { XmwJobs } from '@/models/xmw_jobs.model';
-import { XmwOrganization } from '@/models/xmw_organization.model';
-import { XmwRole } from '@/models/xmw_role.model';
+// import { XmwJobs } from '@/models/xmw_jobs.model';
+// import { XmwOrganization } from '@/models/xmw_organization.model';
+// import { XmwRole } from '@/models/xmw_role.model';
 import { XmwUser } from '@/models/xmw_user.model'; // xmw_user 实体
 import { OperationLogsService } from '@/modules/system/operation-logs/operation-logs.service'; // OperationLogs Service
 import { formatPrice, responseMessage } from '@/utils'; // 全局工具函数
@@ -35,7 +37,10 @@ export class UserManagementService {
     @InjectModel(XmwUser)
     private readonly userModel: typeof XmwUser,
     private readonly operationLogsService: OperationLogsService,
-  ) {}
+    private readonly prismaService: PrismaService
+  ) {
+    // prisma = new PrismaClient();
+  }
 
   /**
    * @description: 获取用户管理列表
@@ -54,33 +59,36 @@ export class UserManagementService {
     // if (status) where.status = { [Op.eq]: status };
     // if (start_time && end_time)
     //   where.created_time = { [Op.between]: [start_time, end_time] };
-
+    // const prisma = new PrismaClient();
     const start = 0;
     const end = 20;
-    const order = 1;
+    // const lim = end-start;
+    // const order = 1;
     const sort = 'createTime';
     const username = '';
     const where = {
-      username: { $regex: username, $options: 'i' }
+      username: username
     };
 
-    const usersRaw = await User.find(where)
-      .skip(start)
-      .limit(end - start)
-      .sort({ [sort]: order });
+    const usersRaw = await this.prismaService.users.findMany({skip:start, take:end-start,orderBy:{
+      [sort] :"asc" 
+    }})
+      // .skip(start)
+      // .limit(end - start)
+      // .sort({ [sort]: order });
 
     const users = usersRaw.map((user) => {
-      const obj = user.toObject();
+      // const obj = user.toObject();
       return {
-        ...obj,
-        id: obj._id,
-        balance: formatPrice(obj.balance),
-        createTime: dayjs(obj.createTime).format('YYYY/MM/DD HH:mm'),
+        ...user,
+        // id: user._id,
+        balance: formatPrice(user.balance),
+        createTime: dayjs(user.createTime).format('YYYY/MM/DD HH:mm'),
         password: ''
       };
     });
 
-    const totalCount = await User.countDocuments(where);
+    const totalCount = await this.prismaService.users.count();
 
     // res.header('Access-Control-Expose-Headers', 'X-Total-Count');
     // res.header('X-Total-Count', totalCount);

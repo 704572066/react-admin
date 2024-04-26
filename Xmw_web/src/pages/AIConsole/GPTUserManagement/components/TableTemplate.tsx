@@ -115,7 +115,7 @@ const TableTemplate: FC = () => {
 		},
 		{
 			title: formatMessage({ id: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'id') }),
-			dataIndex: '_id',
+			dataIndex: 'id',
 			hideInSearch: true,
 			ellipsis: true,
 			align: 'center',

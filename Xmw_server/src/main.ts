@@ -24,7 +24,7 @@ import { AllExceptionsFilter } from './filter/any-exception.filter'; // http 异
 import { HttpExceptionFilter } from './filter/http-exception.filter'; // 任意异常捕获
 import { TransformInterceptor } from './interceptor/transform.interceptor'; // 全局拦截器，用来收集日志
 import { logger } from './middleware/logger.middleware'; // 日志收集中间件
-
+import { PrismaService } from './npx/prisma/prisma.service';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(express.json());
@@ -81,5 +81,9 @@ async function bootstrap() {
       }`,
     );
   });
+
+  const prismaService = app.get(PrismaService);
+  await prismaService.enableShutdownHooks(app);
+
 }
 bootstrap();
