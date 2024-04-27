@@ -13,7 +13,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { AnnouncementModule } from '@/modules/administrative/announcement/announcement.module'; // 智能行政-活动公告
 import { JobsManagementModule } from '@/modules/administrative/jobs-management/jobs-management.module'; // 智能行政-岗位管理
 import { OrganizationModule } from '@/modules/administrative/organization/organization.module'; // 智能行政-组织管理
-import { GPTAppManagementModule } from '@/modules/ai-console/gpt-app-management/gpt-app-management.module'; // GPT-用户管理
+import { GPTAppManagementModule } from '@/modules/ai-console/gpt-app-management/gpt-app-management.module'; // GPT-应用管理
+import { GPTDataSetManagementModule } from '@/modules/ai-console/gpt-dataset-management/gpt-dataset-management.module'; // GPT-知识库管理
 import { GPTUserManagementModule } from '@/modules/ai-console/gpt-user-management/gpt-user-management.module'; // GPT-用户管理
 import { AuthModule } from '@/modules/auth/auth.module'; // 用户鉴权
 import { FilesModule } from '@/modules/files/files.module'; // 文件上传
@@ -58,6 +59,7 @@ import { PrismaModule } from './npx/prisma/prisma.module';
     AnnouncementModule,
     GPTUserManagementModule,
     GPTAppManagementModule,
+    GPTDataSetManagementModule,
     PrismaModule,
   ],
 })

@@ -62,6 +62,7 @@ export enum ROUTES {
   OPERATIONLOG = '/system/operation-log', // 系统设置-操作日志
   GPTUSERMANAGEMENT = '/ai-console/gpt-user-management', // gpt-用户管理
   GPTAPPMANAGEMENT = '/ai-console/gpt-app-management', // gpt-应用管理
+  GPTDATASETMANAGEMENT = '/ai-console/gpt-dataset-management', // gpt-应用管理
 }
 
 /**

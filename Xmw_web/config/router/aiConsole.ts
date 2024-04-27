@@ -31,13 +31,13 @@ export default {
       access: 'adminRouteFilter',
       exact: true,
     },
-    // {
-    //   path: '/system/role-management',
-    //   name: 'role-management',
-    //   component: './System/RoleManagement',
-    //   access: 'adminRouteFilter',
-    //   exact: true,
-    // },
+    {
+      path: '/ai-console/gpt-dataset-management',
+      name: 'gpt-dataset-management',
+      component: './AIConsole/GPTDataSetManagement',
+      access: 'adminRouteFilter',
+      exact: true,
+    },
     // {
     //   path: '/system/internationalization',
     //   name: 'internationalization',

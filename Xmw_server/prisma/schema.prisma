@@ -37,3 +37,20 @@ model apps {
   updateTime DateTime
   version Int?  @map("__v")
 }
+
+model datasets {
+  id String  @id @map("_id")
+  parentId String?
+  teamId String
+  tmbId String
+  type String
+  status String
+  avatar String
+  name String
+  vectorModel String
+  agentModel String
+  intro String?
+  updateTime DateTime
+  permission String
+  version Int?  @map("__v")
+}
