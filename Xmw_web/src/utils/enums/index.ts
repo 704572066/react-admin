@@ -61,6 +61,7 @@ export enum ROUTES {
   INTERNATIONALIZATION = '/system/internationalization', // 系统设置-国际化
   OPERATIONLOG = '/system/operation-log', // 系统设置-操作日志
   GPTUSERMANAGEMENT = '/ai-console/gpt-user-management', // gpt-用户管理
+  GPTAPPMANAGEMENT = '/ai-console/gpt-app-management', // gpt-应用管理
 }
 
 /**

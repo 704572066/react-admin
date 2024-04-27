@@ -1,7 +1,7 @@
 Language : [中文](./README.md) | 英文
 
 <p align="center"><img width="100" src="https://cdn.baiwumm.com/project/xmw-admin/logo.svg" alt="Xmw Admin"></p>
-<h1 align="center">Xmw Admin</h1>
+<h1 align="center">GPT Admin</h1>
 <p align="center">Background system based on React + Nest full stack development</p>
 
 ## 🪴 Project Introduction

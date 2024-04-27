@@ -11,14 +11,14 @@ import type { PageResponse } from '@/utils/types'
 import type { SearchParams, UserStatusProps } from '@/utils/types/system/user-management'
 import { httpRequest } from '@/utils/umiRequest'
 
-const baseURL = ROUTES.GPTUSERMANAGEMENT
+const baseURL = ROUTES.GPTAPPMANAGEMENT
 
 /**
  * @description:  获取用户列表
  * @param {SearchParams} options
  * @Author: 白雾茫茫丶
  */
-export const getUserList = (options?: SearchParams) =>
+export const getAppList = (options?: SearchParams) =>
   httpRequest.get<PageResponse<API.USERMANAGEMENT>>(`${baseURL}`, options);
 
 /**

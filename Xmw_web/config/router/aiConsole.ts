@@ -24,13 +24,13 @@ export default {
       access: 'adminRouteFilter',
       exact: true,
     },
-    // {
-    //   path: '/system/menu-management',
-    //   name: 'menu-management',
-    //   component: './System/MenuManagement',
-    //   access: 'adminRouteFilter',
-    //   exact: true,
-    // },
+    {
+      path: '/ai-console/gpt-app-management',
+      name: 'gpt-app-management',
+      component: './AIConsole/GPTAppManagement',
+      access: 'adminRouteFilter',
+      exact: true,
+    },
     // {
     //   path: '/system/role-management',
     //   name: 'role-management',

@@ -24,6 +24,16 @@ model users {
   promotionRate Int
   timezone  String
   createTime  DateTime
-  version String?  @map("_v")
+  version Int?  @map("__v")
   openaiAccount String?
+}
+
+model apps {
+  id String  @id @map("_id")
+  name String
+  avatar String
+  permission String
+  intro String?
+  updateTime DateTime
+  version Int?  @map("__v")
 }
