@@ -122,7 +122,7 @@ const TableTemplate: FC = () => {
 			width: 120,
 		},
 		{
-			title: formatMessage({ id: formatPerfix(ROUTES.GPTAPPMANAGEMENT, 'user_name') }),
+			title: formatMessage({ id: formatPerfix(ROUTES.GPTAPPMANAGEMENT, 'app_name') }),
 			dataIndex: 'name',
 			ellipsis: true,
 			width: 100,
