@@ -15,21 +15,51 @@ datasource db {
 
 
 model users {
-  id String  @id @map("_id")
-  status String
+  id String  @id @default(auto()) @map("_id") @db.ObjectId
+  status String @default("active")
   username  String
+  email String?
+  phonePrefix Int?
+  phone String?
   password  String
-  avatar  String
-  balance Int
-  promotionRate Int
-  timezone  String
-  createTime  DateTime
+  avatar  String @default("/icon/human.svg")
+  promotionRate Int @default(15)
+  inviterId String? @db.ObjectId
+  openaiKey String?
+  timezone  String @default("Asia/Shanghai")
+  createTime  DateTime @default(now())
+  lastLoginTmbId  String? @db.ObjectId
+  openaiAccount OpenaiAccount?
   version Int?  @map("__v")
-  openaiAccount String?
+}
+
+model teamMembers {
+  id String  @id @default(auto()) @map("_id") @db.ObjectId
+  teamId String @db.ObjectId
+  userId String @db.ObjectId
+  name String
+  role String
+  status String
+  createTime DateTime @default(now())
+  defaultTeam Boolean
+  version Int?  @map("__v")
+  @@map("team.members")
+}
+
+model teams {
+  id String  @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  ownerId String @db.ObjectId
+  avatar String
+  createTime DateTime @default(now())
+  balance Int @default(999900000)
+  teamDomain String?
+  limit Limit?
+  lafAccount LafAccount?
 }
 
 model apps {
-  id String  @id @map("_id")
+  id String  @id @map("_id") @db.ObjectId
   name String
   avatar String
   permission String
@@ -39,10 +69,10 @@ model apps {
 }
 
 model datasets {
-  id String  @id @map("_id")
-  parentId String?
-  teamId String
-  tmbId String
+  id String  @id @map("_id") @db.ObjectId
+  parentId String? @db.ObjectId
+  teamId String @db.ObjectId
+  tmbId String @db.ObjectId
   type String
   status String
   avatar String
@@ -53,4 +83,20 @@ model datasets {
   updateTime DateTime
   permission String
   version Int?  @map("__v")
+}
+
+type OpenaiAccount {
+  key String
+  baseUrl String
+}
+
+type LafAccount {
+  token String
+  appid String
+  pat String
+}
+
+type Limit {
+  lastExportDatasetTime DateTime
+  lastWebsiteSyncTime DateTime
 }

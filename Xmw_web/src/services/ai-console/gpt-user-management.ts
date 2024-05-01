@@ -26,7 +26,7 @@ export const getUserList = (options?: SearchParams) =>
  * @param {API.USERMANAGEMENT} options
  * @Author: 白雾茫茫丶
  */
-export const createUser = (options: API.USERMANAGEMENT) => httpRequest.post<API.USERMANAGEMENT>(`${baseURL}`, options);
+export const createGPTUser = (options: API.USERMANAGEMENT) => httpRequest.post<API.USERMANAGEMENT>(`${baseURL}`, options);
 
 /**
  * @description: 更新用户数据

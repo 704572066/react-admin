@@ -141,3 +141,36 @@ export enum REQUEST_METHODS {
   DELETE = 'DELETE',
   PATCH = 'PATCH',
 }
+
+export enum GPTUserStatusEnum {
+  active = 'active',
+  forbidden = 'forbidden'
+}
+
+export enum TeamMemberRoleEnum {
+  owner = 'owner',
+  admin = 'admin',
+  visitor = 'visitor'
+}
+
+export const TeamMemberRoleMap = {
+  [TeamMemberRoleEnum.owner]: {
+    value: TeamMemberRoleEnum.owner,
+    label: 'user.team.role.Owner'
+  },
+  [TeamMemberRoleEnum.admin]: {
+    value: TeamMemberRoleEnum.admin,
+    label: 'user.team.role.Admin'
+  },
+  [TeamMemberRoleEnum.visitor]: {
+    value: TeamMemberRoleEnum.visitor,
+    label: 'user.team.role.Visitor'
+  }
+}
+
+export enum TeamMemberStatusEnum {
+  waiting = 'waiting',
+  active = 'active',
+  reject = 'reject',
+  leave = 'leave'
+}

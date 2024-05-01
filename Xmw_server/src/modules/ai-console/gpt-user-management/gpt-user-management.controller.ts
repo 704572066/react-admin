@@ -29,7 +29,7 @@ import {
   CreateUserManagementDto,
   ListUserManagementDto,
   ResponseUserManagementDto,
-  SaveUserManagementDto,
+  SaveGPTUserManagementDto,
   UpdateUserStatusDto,
 } from './dto';
 import { UserManagementService } from './gpt-user-management.service'; // UserManagement Service
@@ -66,14 +66,14 @@ export class GPTUserManagementController {
   @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiOkResponse({ type: CreateUserManagementDto })
-  @ApiOperation({ summary: '创建用户数据' })
-  async createUser(
-    @Body() userInfo: SaveUserManagementDto,
-    @Session() session: SessionTypes,
+  @ApiOperation({ summary: '创建GPT用户数据' })
+  async createGPTUser(
+    @Body() userInfo: SaveGPTUserManagementDto,
+    // @Session() session: SessionTypes,
   ) {
-    const response = await this.userManagementService.createUser(
+    const response = await this.userManagementService.createGPTUser(
       userInfo,
-      session,
+      // session,
     );
     return response;
   }
@@ -82,22 +82,22 @@ export class GPTUserManagementController {
    * @description: 更新用户数据
    * @author: 白雾茫茫丶
    */
-  @UseGuards(AuthGuard('jwt'))
-  @Put('/:user_id')
-  @ApiOkResponse({ type: UpdateResponseDto })
-  @ApiOperation({ summary: '更新用户数据' })
-  async updateUser(
-    @Param('user_id') user_id: string,
-    @Body() userInfo: SaveUserManagementDto,
-    @Session() session: SessionTypes,
-  ) {
-    const response = await this.userManagementService.updateUser(
-      user_id,
-      userInfo,
-      session,
-    );
-    return response;
-  }
+  // @UseGuards(AuthGuard('jwt'))
+  // @Put('/:user_id')
+  // @ApiOkResponse({ type: UpdateResponseDto })
+  // @ApiOperation({ summary: '更新用户数据' })
+  // async updateUser(
+  //   @Param('user_id') user_id: string,
+  //   @Body() userInfo: SaveUserManagementDto,
+  //   @Session() session: SessionTypes,
+  // ) {
+  //   const response = await this.userManagementService.updateUser(
+  //     user_id,
+  //     userInfo,
+  //     session,
+  //   );
+  //   return response;
+  // }
 
   /**
    * @description: 删除用户数据

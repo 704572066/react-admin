@@ -12,13 +12,13 @@ import {
   ResponseUserManagementDto,
 } from './response.user-management.dto'; // 查询列表返回响应体 Dto
 import {
-  SaveUserManagementDto,
+  SaveGPTUserManagementDto,
   UpdateUserStatusDto,
 } from './save.user-management.dto'; // 保存用户数据 Dto
 
 export {
   ListUserManagementDto,
-  SaveUserManagementDto,
+  SaveGPTUserManagementDto,
   CreateUserManagementDto,
   ResponseUserManagementDto,
   UpdateUserStatusDto,

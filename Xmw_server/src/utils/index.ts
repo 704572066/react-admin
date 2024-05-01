@@ -6,6 +6,8 @@
  * @LastEditors: 白雾茫茫丶
  * @LastEditTime: 2023-09-28 16:39:48
  */
+import * as crypto from 'crypto'; // AES/DES加密
+import CryptoJS from 'crypto-js'; // AES/DES加密
 import * as fs from 'fs';
 
 import { XmwInternational } from '@/models/xmw_international.model'; // 数据库实体
@@ -112,4 +114,8 @@ export const checkDirAndCreate = (filePath: string): void => {
 export const PRICE_SCALE = 100000;
 export const formatPrice = (val = 0, multiple = 1) => {
   return Number(((val / PRICE_SCALE) * multiple).toFixed(10));
+};
+
+export const hashStr = (str: string) => {
+  return crypto.createHash('sha256').update(str).digest('hex');
 };

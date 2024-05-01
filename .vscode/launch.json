@@ -10,6 +10,13 @@
       "name": "Launch Chrome against localhost",
       "url": "http://localhost:8888",
       "webRoot": "${workspaceFolder}/Xmw_web"
-    }
+    },
+    {
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm start:dev",
+      "cwd": "${workspaceFolder}/Xmw_server"
+    },
   ]
 }

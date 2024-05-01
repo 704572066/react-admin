@@ -26,7 +26,7 @@ import {
 	statusColumn,
 } from '@/components/TableColumns'
 import { delUser, getUserList, setUserStatus } from '@/services/ai-console/gpt-user-management' // 用户管理接口
-import { decryptionAesPsd, formatPerfix, formatResponse, renderColumnsStateMap } from '@/utils'
+import { formatPerfix, formatResponse, hashStr, renderColumnsStateMap } from '@/utils'
 import { IconFont } from '@/utils/const'
 import { INTERNATION, ROUTES, SEX, STATUS } from '@/utils/enums'
 import type { SearchParams } from '@/utils/types/system/user-management'
@@ -276,7 +276,7 @@ const TableTemplate: FC = () => {
 					editCallback={() => {
 						const result = cloneDeep(record)
 						// 表单数据回显处理,密码解密
-						result.password = result.confirmPassword = decryptionAesPsd(record.password)
+						result.password = result.confirmPassword = hashStr(record.password)
 						// 编辑场景下需要使用formMapRef循环设置formData
 						stepFormMapRef?.current?.forEach((formInstanceRef) => {
 							formInstanceRef?.current?.setFieldsValue(result);

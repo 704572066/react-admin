@@ -148,3 +148,8 @@ export type MenuTheme = EnumValues<typeof MENU_THEME>;
  * @author: 白雾茫茫丶
  */
 export type Sex = EnumValues<typeof SEX>;
+
+export type OpenaiAccount = {
+  key: string,
+  baseUrl: string
+}

@@ -20,7 +20,8 @@ import { User } from '@/models/mongodb/schema';
 // import { XmwRole } from '@/models/xmw_role.model';
 import { XmwUser } from '@/models/xmw_user.model'; // xmw_user 实体
 import { OperationLogsService } from '@/modules/system/operation-logs/operation-logs.service'; // OperationLogs Service
-import { formatPrice, responseMessage } from '@/utils'; // 全局工具函数
+import { formatPrice, hashStr, responseMessage } from '@/utils'; // 全局工具函数
+import { TeamMemberRoleEnum, TeamMemberStatusEnum } from '@/utils/enums'; // 全局工具函数
 import type {
   PageResponse,
   Response,
@@ -28,7 +29,7 @@ import type {
   Status,
 } from '@/utils/types';
 
-import { ListUserManagementDto, SaveUserManagementDto } from './dto';
+import { ListUserManagementDto, SaveGPTUserManagementDto } from './dto';
 
 @Injectable()
 export class UserManagementService {
@@ -82,7 +83,7 @@ export class UserManagementService {
       return {
         ...user,
         // id: user._id,
-        balance: formatPrice(user.balance),
+        // balance: formatPrice(user.balance),
         createTime: dayjs(user.createTime).format('YYYY/MM/DD HH:mm'),
         password: ''
       };
@@ -130,74 +131,161 @@ export class UserManagementService {
   }
 
   /**
-   * @description: 创建用户数据
+   * @description: 创建GPT用户数据
    * @author: 白雾茫茫丶
    */
-  async createUser(
-    userInfo: SaveUserManagementDto,
-    session: SessionTypes,
-  ): Promise<Response<SaveUserManagementDto>> {
+  async createGPTUser(
+    userInfo: SaveGPTUserManagementDto,
+    // session: SessionTypes,
+  ): Promise<Response<any>> {
     // 解构参数
-    const { user_name, work_no, phone } = userInfo;
-    const [result, created] = await this.userModel.findOrCreate({
-      // 用户名称和用户工号、手机号码不能相同
-      where: { [Op.or]: { user_name, work_no, phone } },
-      // 如果不存在则插入数据
-      defaults: {
-        ...userInfo,
-        founder: session?.currentUserInfo?.user_id,
-      },
-    });
-    // 判断是否创建
-    if (created) {
-      // 保存操作日志
-      await this.operationLogsService.saveLogs(`创建用户：${user_name}`);
-      return responseMessage(result);
-    } else {
-      return responseMessage({}, '用户名称和用户工号、手机号码已存在!', -1);
+    const { phone, password } = userInfo;
+    const where = {
+      username: phone
+    };
+    const user = await this.prismaService.users.findFirst({where});
+
+    if(user){
+      return responseMessage({}, '用户名手机号码已存在!', -1);
     }
+    
+    // const [result, created] = await this.userModel.findOrCreate({
+    //   // 用户名称和用户工号、手机号码不能相同
+    //   where: { [Op.or]: { user_name, work_no, phone } },
+    //   // 如果不存在则插入数据
+    //   defaults: {
+    //     ...userInfo,
+    //     founder: session?.currentUserInfo?.user_id,
+    //   },
+    // });
+    let newUser = null;
+    await this.prismaService.$transaction(async (tx) => {
+      // 1. Decrement amount from the sender.
+      newUser = await tx.users.create({
+        data:{
+          username:phone, 
+          password:hashStr(password)
+        },
+      });
+      const where = {
+        userId: newUser.id,
+        defaultTeam: true
+      };
+      const tmb = await tx.teamMembers.findFirst({where});
+    
+      if (!tmb) {
+        // create
+        const newTeam = await tx.teams.create(
+          {
+            data:{
+              ownerId: newUser.id,
+              name: 'My Team',
+              avatar: '/icon/logo.svg',
+              balance: 99990000
+              // createTime: new Date()
+            }
+          }
+        );
+        await tx.teamMembers.create(
+          {
+            data:{
+              teamId: newTeam.id,
+              userId: newUser.id,
+              name: 'Owner',
+              role: TeamMemberRoleEnum.owner,
+              status: TeamMemberStatusEnum.active,
+              // createTime: new Date(),
+              defaultTeam: true
+            }
+          }
+        );
+        await this.operationLogsService.saveLogs(`创建用户：${newUser.username}`);
+        
+        // console.log('create default team', newUser.id);
+      } else {
+        await this.operationLogsService.saveLogs(`默认团队已存在：${tmb.teamId}`);
+        // console.log('default team exist', newUser.id);
+        // await tx.teams.findByIdAndUpdate(tmb.teamId, {
+        //   $set: {
+        //     ...(balance !== undefined && { balance })
+        //   }
+        // });
+      }
+      
+      // 2. Verify that the sender's balance didn't go below zero.
+      // if (sender.balance < 0) {
+      //   throw new Error(`${from} doesn't have enough to send ${amount}`)
+      // }
+  
+      // 3. Increment the recipient's balance by amount
+      // const recipient = await tx.account.update({
+      //   data: {
+      //     balance: {
+      //       increment: amount,
+      //     },
+      //   },
+      //   where: {
+      //     email: to,
+      //   },
+      // })
+  
+      // return recipient
+    })
+    return responseMessage(newUser);
+    // const [posts, totalPosts] = await this.prismaService.$transaction([
+    //   this.prismaService.users.create({ where: { title: { contains: 'prisma' } } }),
+    //   prisma.post.count(),
+    // ])
+    // await this.prismaService.users.create
+
+    // 判断是否创建
+    
+    // 保存操作日志
+    // await this.operationLogsService.saveLogs(`创建用户：${newUser.}`);
+    // return responseMessage(result);
+    
   }
 
   /**
    * @description: 更新用户数据
    * @author: 白雾茫茫丶
    */
-  async updateUser(
-    user_id: string,
-    userInfo: SaveUserManagementDto,
-    session: SessionTypes,
-  ): Promise<Response<number[]>> {
-    // 解构参数
-    const { user_name, work_no, phone } = userInfo;
-    if (user_name && work_no && phone) {
-      // 用户名称和用户工号、手机号码不能相同
-      const exist = await this.userModel.findOne({
-        where: {
-          [Op.or]: { user_name, work_no, phone },
-          user_id: {
-            [Op.ne]: user_id,
-          },
-        },
-      });
-      // 如果有结果，则证明已存在，这里存在两种情况，
-      if (exist) {
-        return responseMessage({}, '用户名称和用户工号、手机号码已存在!', -1);
-      }
-    }
-    // 如果通过则执行 sql save 语句
-    const result = await this.userModel.update(userInfo, {
-      where: { user_id },
-    });
-    // 更新 session 用户信息
-    session.currentUserInfo = { ...session.currentUserInfo, ...userInfo };
-    // 保存操作日志
-    // 根据主键查找出当前数据
-    const currentInfo = await this.userModel.findByPk(user_id);
-    await this.operationLogsService.saveLogs(
-      `编辑用户：${currentInfo.user_name}`,
-    );
-    return responseMessage(result);
-  }
+  // async updateUser(
+  //   user_id: string,
+  //   userInfo: SaveGPTUserManagementDto,
+  //   session: SessionTypes,
+  // ): Promise<Response<number[]>> {
+  //   // 解构参数
+  //   const { user_name, work_no, phone } = userInfo;
+  //   if (user_name && work_no && phone) {
+  //     // 用户名称和用户工号、手机号码不能相同
+  //     const exist = await this.userModel.findOne({
+  //       where: {
+  //         [Op.or]: { user_name, work_no, phone },
+  //         user_id: {
+  //           [Op.ne]: user_id,
+  //         },
+  //       },
+  //     });
+  //     // 如果有结果，则证明已存在，这里存在两种情况，
+  //     if (exist) {
+  //       return responseMessage({}, '用户名称和用户工号、手机号码已存在!', -1);
+  //     }
+  //   }
+  //   // 如果通过则执行 sql save 语句
+  //   const result = await this.userModel.update(userInfo, {
+  //     where: { user_id },
+  //   });
+  //   // 更新 session 用户信息
+  //   session.currentUserInfo = { ...session.currentUserInfo, ...userInfo };
+  //   // 保存操作日志
+  //   // 根据主键查找出当前数据
+  //   const currentInfo = await this.userModel.findByPk(user_id);
+  //   await this.operationLogsService.saveLogs(
+  //     `编辑用户：${currentInfo.user_name}`,
+  //   );
+  //   return responseMessage(result);
+  // }
 
   /**
    * @description: 删除角色数据

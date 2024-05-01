@@ -20,7 +20,7 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 	return (
 		<>
 			{/* 用户名称 */}
-			<ProFormText
+			{/* <ProFormText
 				name="user_name"
 				colProps={{ span: 12 }}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'user_name') })}
@@ -38,9 +38,9 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 						message: formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'user_name.rules') }),
 					},
 				]}
-			/>
+			/> */}
 			{/* 用户工号 */}
-			<ProFormText
+			{/* <ProFormText
 				name="work_no"
 				colProps={{ span: 12 }}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'work_no') })}
@@ -52,9 +52,9 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 					maxLength: 20,
 				}}
 				rules={[{ required: true, whitespace: true }]}
-			/>
+			/> */}
 			{/* 中文名 */}
-			<ProFormText
+			{/* <ProFormText
 				name="cn_name"
 				colProps={{ span: 12 }}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'cn_name') })}
@@ -65,9 +65,9 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 					maxLength: 20,
 				}}
 				rules={[{ required: true, whitespace: true }]}
-			/>
+			/> */}
 			{/* 英文 */}
-			<ProFormText
+			{/* <ProFormText
 				name="en_name"
 				colProps={{ span: 12 }}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'en_name') })}
@@ -77,9 +77,9 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 					showCount: true,
 					maxLength: 20,
 				}}
-			/>
+			/> */}
 			{/* 年龄 */}
-			<ProFormDigit
+			{/* <ProFormDigit
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'age') })}
 				name="age"
 				colProps={{ span: 12 }}
@@ -87,9 +87,9 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 				max={120}
 				initialValue={18}
 				fieldProps={{ precision: 0 }}
-			/>
+			/> */}
 			{/* 性别 */}
-			<ProFormRadio.Group
+			{/* <ProFormRadio.Group
 				name="sex"
 				colProps={{ span: 12 }}
 				initialValue={SEX.MALE}
@@ -98,7 +98,7 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 				}}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'sex') })}
 				options={SEX_OPTS}
-			/>
+			/> */}
 			{/* 手机号码 */}
 			<ProFormText
 				name="phone"
@@ -136,11 +136,11 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 				}]}
 			/>
 			{/* 排序 */}
-			<ProFormSort colProps={{ span: 12 }} />
+			{/* <ProFormSort colProps={{ span: 12 }} /> */}
 			{/* 状态 */}
 			<ProFormStatus colProps={{ span: 12 }} />
 			{/* 用户名称 */}
-			<ProFormText
+			{/* <ProFormText
 				name="motto"
 				colProps={{ span: 24 }}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'motto') })}
@@ -150,7 +150,7 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 					showCount: true,
 					maxLength: 32,
 				}}
-			/>
+			/> */}
 		</>
 	)
 }

@@ -15,8 +15,8 @@ import { FC } from 'react';
 
 import StrengthMeter from '@/components/StrengthMeter' // 密码强度校验
 import { renderFormTitle } from '@/components/TableColumns'
-import { createUser, updateUser } from '@/services/ai-console/gpt-user-management'
-import { encryptionAesPsd, formatPerfix, isSuccess } from '@/utils'
+import { createGPTUser, updateUser } from '@/services/ai-console/gpt-user-management'
+import { encryptionAesPsd, formatPerfix, hashStr, isSuccess } from '@/utils'
 import { ROUTES } from '@/utils/enums'
 import type { FormTemplateProps } from '@/utils/types/system/user-management'
 
@@ -40,9 +40,9 @@ const FormTemplate: FC<FormTemplateProps> = ({
 	// 提交表单
 	const handlerSubmit = async (values: API.USERMANAGEMENT) => {
 		// 将密码加密
-		values.password = encryptionAesPsd(values.password)
+		values.password = hashStr(values.password)
 		// 提交数据
-		await (user_id ? updateUser : createUser)({ ...values, user_id }).then(({ code, msg }) => {
+		await (user_id ? updateUser : createGPTUser)({ ...values, user_id }).then(({ code, msg }) => {
 			if (isSuccess(code)) {
 				message.success(msg);
 				reloadTable()
@@ -62,15 +62,15 @@ const FormTemplate: FC<FormTemplateProps> = ({
 			component: <PersonalInformation />,
 		},
 		// 用户信息
-		{
-			title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.user-information'),
-			component: <UserInformation />,
-		},
+		// {
+		// 	title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.user-information'),
+		// 	component: <UserInformation />,
+		// },
 		// 设置头像
-		{
-			title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.set-avatar'),
-			component: <SetAvatar />,
-		},
+		// {
+		// 	title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.set-avatar'),
+		// 	component: <SetAvatar />,
+		// },
 		// 设置密码
 		{
 			title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.set-password'),

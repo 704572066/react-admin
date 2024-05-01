@@ -8,55 +8,88 @@
  */
 import { ApiProperty } from '@nestjs/swagger';
 
-import type { Sex, Status } from '@/utils/types';
+import type { OpenaiAccount, Status } from '@/utils/types';
+// import { Type } from 'class-transformer';
 
 /**
  * @description: 保存用户数据
  * @author: 白雾茫茫丶
  */
-export class SaveUserManagementDto {
-  @ApiProperty({
-    type: String,
-    description: '用户名称',
-    default: 'admin',
-  })
-  user_name: string;
+export class SaveGPTUserManagementDto {
 
   @ApiProperty({
     type: String,
-    description: '用户工号',
-    default: 'SZ001',
+    description: 'ID',
   })
-  work_no: string;
+  id: string;
 
   @ApiProperty({
     type: String,
-    description: '中文名',
-    default: '李知恩',
+    description: 'tmb',
   })
-  cn_name: string;
+  lastLoginTmbId?: string;
 
   @ApiProperty({
     type: String,
-    description: '中文名',
-    default: '李知恩',
-    required: false,
+    description: 'openaiAccount',
   })
-  en_name?: string;
+  openaiAccount?: OpenaiAccount;
 
   @ApiProperty({
     type: String,
-    description: '性别',
-    default: '1',
+    description: 'inviterId',
   })
-  sex: Sex;
+  inviterId?: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'openaiKey',
+  })
+  openaiKey?: string;  
+
+  @ApiProperty({
+    type: String,
+    description: 'createTime',
+  })
+  createTime?: string;  
+
+  @ApiProperty({
+    type: String,
+    description: 'timezone',
+  })
+  timezone?: string; 
+
+  @ApiProperty({
+    type: String,
+    description: '状态',
+    default: 'active',
+  })
+  status: string;
 
   @ApiProperty({
     type: Number,
-    description: '年龄',
-    default: 18,
+    description: '比例',
   })
-  age: number;
+  promotionRate?: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'phonePrefix',
+  })
+  phonePrefix?: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '版本',
+  })
+  version?: number;
+
+  @ApiProperty({
+    type: String,
+    description: '用户名',
+    default: 'root',
+  })
+  username: string;
 
   @ApiProperty({
     type: String,
@@ -71,72 +104,7 @@ export class SaveUserManagementDto {
     description: '电话号码',
     default: '13800138000',
   })
-  phone: string;
-
-  @ApiProperty({
-    type: Number,
-    description: '排序',
-    default: 1,
-  })
-  sort: number;
-
-  @ApiProperty({
-    type: Number,
-    description: '用户状态',
-    default: 1,
-  })
-  status: Status;
-
-  @ApiProperty({
-    type: String,
-    description: '座右铭',
-    default: '真正的大师永远怀着一颗学徒的心',
-    required: false,
-  })
-  motto?: string;
-
-  @ApiProperty({
-    type: String,
-    description: '所属角色',
-    default: 'c49aeeca-bc95-444e-a437-a2d36e79def',
-  })
-  role_id: string;
-
-  @ApiProperty({
-    type: String,
-    description: '所属组织',
-    default: '9e0d462d-5254-41ba-b8f3-982a7cf588f0',
-  })
-  org_id: string;
-
-  @ApiProperty({
-    type: String,
-    description: '所属岗位',
-    default: '046aeaa4-f707-4981-8a30-6e4a8488eb52',
-  })
-  jobs_id: string;
-
-  @ApiProperty({
-    type: Array,
-    description: '所属城市',
-    default: ['13', '1302', '130203'],
-  })
-  city: string[];
-
-  @ApiProperty({
-    type: String,
-    description: '详细地址',
-    default: '公寓888',
-  })
-  addredd: string;
-
-  @ApiProperty({
-    type: Array,
-    description: '人物标签',
-    default: ['善良', '阳光'],
-    required: false,
-  })
-  tags?: string[];
+  phone?: string;
 
   @ApiProperty({
     type: String,
@@ -145,11 +113,11 @@ export class SaveUserManagementDto {
       'https://react.baiwumm.com/static/image/2023-01-13/5d7453ad-477c-47b9-be6e-212227710033.gif',
     required: false,
   })
-  avatar_url?: string;
+  avatar?: string;
 
   @ApiProperty({
-    type: Array,
-    description: '用户头像',
+    type: String,
+    description: '密码',
     default: 'v+M+IRi7oG0tn2sJGZUHRQ==',
     required: false,
   })
