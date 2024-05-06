@@ -30,7 +30,7 @@ import {
   ListUserManagementDto,
   ResponseUserManagementDto,
   SaveGPTUserManagementDto,
-  UpdateUserStatusDto,
+  UpdateGPTUserStatusDto,
 } from './dto';
 import { UserManagementService } from './gpt-user-management.service'; // UserManagement Service
 
@@ -117,15 +117,15 @@ export class GPTUserManagementController {
    * @author: 白雾茫茫丶
    */
   @UseGuards(AuthGuard('jwt'))
-  @Patch('/:user_id')
+  @Patch('/:id')
   @ApiOkResponse({ type: UpdateResponseDto })
   @ApiOperation({ summary: '更新用户状态' })
-  async updateUserStatus(
-    @Param('user_id') user_id: string,
-    @Body() { status }: UpdateUserStatusDto,
+  async updateGPTUserStatus(
+    @Param('id') id: string,
+    @Body() { status }: UpdateGPTUserStatusDto,
   ) {
-    const response = await this.userManagementService.updateUserStatus(
-      user_id,
+    const response = await this.userManagementService.updateGPTUserStatus(
+      id,
       status,
     );
     return response;

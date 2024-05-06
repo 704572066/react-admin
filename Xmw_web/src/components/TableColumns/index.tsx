@@ -16,7 +16,7 @@ import { FC } from 'react'
 
 import { formatPathName, formatPerfix, getLocalStorageItem, randomTagColor } from '@/utils'
 import { FLAG_OPTS } from '@/utils/const'
-import { INTERNATION, LOCAL_STORAGE, OPERATION, ROUTES, STATUS } from '@/utils/enums'
+import { GPTUSERSTATUS, INTERNATION, LOCAL_STORAGE, OPERATION, ROUTES, STATUS } from '@/utils/enums'
 import permissions from '@/utils/permission'
 import type { PathNames } from '@/utils/types'
 
@@ -34,8 +34,8 @@ export const statusColumn: ProColumns = {
   onFilter: true,
   align: 'center',
   valueEnum: {
-    [STATUS.DISABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />, status: 'Default' },
-    [STATUS.NORMAL]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
+    [GPTUSERSTATUS.DISABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />, status: 'Default' },
+    [GPTUSERSTATUS.NORMAL]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
   },
 }
 

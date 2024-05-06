@@ -25,10 +25,10 @@ import {
 	sortColumn,
 	statusColumn,
 } from '@/components/TableColumns'
-import { delUser, getUserList, setUserStatus } from '@/services/ai-console/gpt-user-management' // 用户管理接口
+import { delUser, getUserList, setGPTUserStatus } from '@/services/ai-console/gpt-user-management' // 用户管理接口
 import { formatPerfix, formatResponse, hashStr, renderColumnsStateMap } from '@/utils'
 import { IconFont } from '@/utils/const'
-import { INTERNATION, ROUTES, SEX, STATUS } from '@/utils/enums'
+import { GPTUSERSTATUS, INTERNATION, ROUTES, SEX, STATUS } from '@/utils/enums'
 import type { SearchParams } from '@/utils/types/system/user-management'
 
 import FormTemplate from './FormTemplate' // 表单组件
@@ -72,10 +72,10 @@ const TableTemplate: FC = () => {
 	})
 
 	// 设置用户状态
-	const changeUserStatus = async ({ user_id, status }: API.USERMANAGEMENT) => {
-		await setUserStatus({
-			user_id,
-			status: status === STATUS.DISABLE ? STATUS.NORMAL : STATUS.DISABLE,
+	const changeGPTUserStatus = async ({ id, status }: API.GPTUSERMANAGEMENT) => {
+		await setGPTUserStatus({
+			id,
+			status: status === GPTUSERSTATUS.DISABLE ? GPTUSERSTATUS.NORMAL : GPTUSERSTATUS.DISABLE,
 		}).then((result) => {
 			message.success(result.msg)
 			reloadTable()
@@ -85,19 +85,19 @@ const TableTemplate: FC = () => {
 	}
 
 	// 渲染设置角色状态
-	const renderRoleStatus = (record: API.USERMANAGEMENT) => (
+	const renderRoleStatus = (record: API.GPTUSERMANAGEMENT) => (
 		<Popconfirm
 			title={formatMessage({ id: INTERNATION.POPCONFIRM_TITLE })}
-			open={userId === record.user_id && userLoading}
-			onConfirm={() => changeUserStatus(record)}
+			open={userId === record.id && userLoading}
+			onConfirm={() => changeGPTUserStatus(record)}
 			onCancel={() => setUserLoadingFalse()}
 			key="popconfirm"
 		><Switch
 				checkedChildren={formatMessage({ id: INTERNATION.STATUS_NORMAL })}
 				unCheckedChildren={formatMessage({ id: INTERNATION.STATUS_DISABLE })}
-				checked={record.status === STATUS.NORMAL}
-				loading={userId === record.user_id && userLoading}
-				onChange={() => { setUserLoadingTrue(); setUserId(record.user_id) }}
+				checked={record.status === GPTUSERSTATUS.NORMAL}
+				loading={userId === record.id && userLoading}
+				onChange={() => { setUserLoadingTrue(); setUserId(record.id) }}
 			/>
 		</Popconfirm>
 	);
@@ -106,7 +106,7 @@ const TableTemplate: FC = () => {
 * @description: proTable columns 配置项
 * @author: 白雾茫茫丶
 */
-	const columns: ProColumns<API.USERMANAGEMENT>[] = [
+	const columns: ProColumns<API.GPTUSERMANAGEMENT>[] = [
 		{
 			dataIndex: 'index',
 			valueType: 'indexBorder',
@@ -285,7 +285,7 @@ const TableTemplate: FC = () => {
 					}}
 					deleteParams={{
 						request: delUser,
-						id: record.user_id,
+						id: record.id,
 					}}
 					reloadTable={reloadTable}
 				/>
@@ -295,7 +295,7 @@ const TableTemplate: FC = () => {
 
 	return (
 		<>
-			<ProTable<API.USERMANAGEMENT, SearchParams>
+			<ProTable<API.GPTUSERMANAGEMENT, SearchParams>
 				actionRef={tableRef}
 				columns={columns}
 				request={async (params: SearchParams) => fetchUserList(params)}

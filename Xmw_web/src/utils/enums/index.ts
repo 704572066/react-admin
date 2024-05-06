@@ -238,3 +238,8 @@ export enum TABSLAYOUT {
   LEFT = 'left', // 关闭左侧
   OTHERS = 'others', // 关闭其它
 }
+
+export enum GPTUSERSTATUS {
+  DISABLE = 'forbidden', // 禁用
+  NORMAL = 'active', // 正常
+}

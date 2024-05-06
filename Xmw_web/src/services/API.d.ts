@@ -7,10 +7,11 @@
  * @LastEditTime: 2023-10-07 14:24:23
  */
 
-import type { CommonTypes, Flag, Langs, RequestMethods, TableTimes } from '@/utils/types'
+import type { CommonTypes, Flag, GPTUserStatus, Langs, RequestMethods, TableTimes } from '@/utils/types'
 import type { AnnouncementType } from '@/utils/types/administrative/announcement'
 import type { OrgTypes } from '@/utils/types/administrative/organization'
 import type { LayoutTypes, MenuTheme, MenuTypes, TargetTypes } from '@/utils/types/system/menu-management'
+
 
 declare global {
   namespace API {
@@ -172,5 +173,32 @@ declare global {
       params: Record<string, any>; // 请求参数
       api_url: string; // 请求地址
     } & Pick<USERMANAGEMENT, 'user_id'>;
+
+    type OpenaiAccount = {
+      key: string
+      baseUrl: string
+    }
+  
+    type GPTUSERMANAGEMENT = {
+      id: string; // 用户id
+      status: GPTUserStatus; // 状态
+      username: string; // 用户名称
+      
+      password: string; // 密码(加密)
+     
+      avatar: string; // 头像地址
+  
+      balance: number;
+      promotionRate: number;
+      timezone: string;
+      
+      createTime: Date;
+      version: string;
+      openaiAccount: OpenaiAccount;
+    }
   }
+
+
+
+
 }

@@ -23,6 +23,7 @@ import { OperationLogsService } from '@/modules/system/operation-logs/operation-
 import { formatPrice, hashStr, responseMessage } from '@/utils'; // 全局工具函数
 import { TeamMemberRoleEnum, TeamMemberStatusEnum } from '@/utils/enums'; // 全局工具函数
 import type {
+  GPTUserStatus,
   PageResponse,
   Response,
   SessionTypes,
@@ -315,20 +316,22 @@ export class UserManagementService {
    * @description: 更新用户状态
    * @author: 白雾茫茫丶
    */
-  async updateUserStatus(
-    user_id: string,
-    status: Status,
+  async updateGPTUserStatus(
+    id: string,
+    status: GPTUserStatus,
   ): Promise<Response<number[]>> {
     // 执行 update 更新 xmw_role 状态
-    const result = await this.userModel.update(
-      { status },
-      { where: { user_id } },
+    const result = await this.prismaService.users.update(
+      { 
+        where: { id:id },
+        data:{ status:status }
+      }
     );
     // 保存操作日志
     // 根据主键查找出当前数据
-    const currentInfo = await this.userModel.findByPk(user_id);
+    // const currentInfo = await this.prismaService.users.findFirst({where:{id}});
     await this.operationLogsService.saveLogs(
-      `更新用户[${currentInfo.user_name}]状态：${
+      `更新用户[${result.username}]状态：${
         { 0: '禁用', 1: '正常' }[status]
       }`,
     );

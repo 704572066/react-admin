@@ -174,3 +174,8 @@ export enum TeamMemberStatusEnum {
   reject = 'reject',
   leave = 'leave'
 }
+
+export enum GPT_USER_STATUS {
+  DISABLE='forbidden', // 禁用
+  NORMAL='active', // 正常
+}

@@ -13,7 +13,7 @@ import {
 } from './response.user-management.dto'; // 查询列表返回响应体 Dto
 import {
   SaveGPTUserManagementDto,
-  UpdateUserStatusDto,
+  UpdateGPTUserStatusDto,
 } from './save.user-management.dto'; // 保存用户数据 Dto
 
 export {
@@ -21,5 +21,5 @@ export {
   SaveGPTUserManagementDto,
   CreateUserManagementDto,
   ResponseUserManagementDto,
-  UpdateUserStatusDto,
+  UpdateGPTUserStatusDto,
 };

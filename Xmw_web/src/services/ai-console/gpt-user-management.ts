@@ -8,6 +8,7 @@
  */
 import { ROUTES } from '@/utils/enums'
 import type { PageResponse } from '@/utils/types'
+import type { GPTUserStatusProps } from '@/utils/types/ai-console/gpt-user-management'
 import type { SearchParams, UserStatusProps } from '@/utils/types/system/user-management'
 import { httpRequest } from '@/utils/umiRequest'
 
@@ -48,5 +49,5 @@ export const delUser = (user_id: string) => httpRequest.delete<number>(`${baseUR
  * @param {Data} options
  * @Author: 白雾茫茫丶
  */
-export const setUserStatus = ({ user_id, status }: UserStatusProps) =>
-  httpRequest.patch<number[]>(`${baseURL}/${user_id}`, { status });
+export const setGPTUserStatus = ({ id, status }: GPTUserStatusProps) =>
+  httpRequest.patch<number[]>(`${baseURL}/${id}`, { status });

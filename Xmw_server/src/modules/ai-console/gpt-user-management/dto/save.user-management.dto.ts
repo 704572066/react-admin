@@ -8,7 +8,7 @@
  */
 import { ApiProperty } from '@nestjs/swagger';
 
-import type { OpenaiAccount, Status } from '@/utils/types';
+import type { GPTUserStatus, OpenaiAccount } from '@/utils/types';
 // import { Type } from 'class-transformer';
 
 /**
@@ -128,11 +128,11 @@ export class SaveGPTUserManagementDto {
  * @description: 更新用户状态 Dto
  * @author: 白雾茫茫丶
  */
-export class UpdateUserStatusDto {
+export class UpdateGPTUserStatusDto {
   @ApiProperty({
-    type: Number,
+    type: String,
     description: '用户状态',
-    default: 1,
+    default: 'active',
   })
-  status: Status;
+  status: GPTUserStatus;
 }

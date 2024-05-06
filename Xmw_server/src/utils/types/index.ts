@@ -9,6 +9,7 @@
 import {
   ANNOUNCEMENT_TYPE,
   FLAG,
+  GPT_USER_STATUS,
   LANGS,
   LAYOUT_TYPE,
   MENU_THEME,
@@ -153,3 +154,5 @@ export type OpenaiAccount = {
   key: string,
   baseUrl: string
 }
+
+export type GPTUserStatus = EnumValues<typeof GPT_USER_STATUS>;
