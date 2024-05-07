@@ -7,7 +7,8 @@
  * @LastEditTime: 2023-10-07 14:24:23
  */
 
-import type { CommonTypes, Flag, GPTUserStatus, Langs, RequestMethods, TableTimes } from '@/utils/types'
+import { GPTUSERSTATUS } from '@/utils/enums'
+import type { CommonTypes, Flag, Langs, RequestMethods, TableTimes } from '@/utils/types'
 import type { AnnouncementType } from '@/utils/types/administrative/announcement'
 import type { OrgTypes } from '@/utils/types/administrative/organization'
 import type { LayoutTypes, MenuTheme, MenuTypes, TargetTypes } from '@/utils/types/system/menu-management'
@@ -181,7 +182,7 @@ declare global {
   
     type GPTUSERMANAGEMENT = {
       id: string; // 用户id
-      status: GPTUserStatus; // 状态
+      status: GPTUSERSTATUS; // 状态
       username: string; // 用户名称
       
       password: string; // 密码(加密)

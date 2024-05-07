@@ -20,6 +20,7 @@ import { formatPerfix } from '@/utils'
 import {
   ANNOUNCEMENT_TYPE,
   FLAG,
+  GPTUSERSTATUS,
   INTERNATION,
   LANGS,
   LAYOUT_TYPE,
@@ -177,3 +178,14 @@ export const NAV_THEME_OPTS: LabeledValue[] = keys(MENU_THEME).map((key: EnumKey
     label: <FormattedMessage id={formatPerfix(ROUTES.MENUMANAGEMENT, `navTheme.${MENU_THEME[key]}`)} />,
   }
 ))
+
+export const GPT_USER_STATUS_OPTS: LabeledValue[] = [
+  {
+    label: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />,
+    value: GPTUSERSTATUS.NORMAL,
+  },
+  {
+    label: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />,
+    value: GPTUSERSTATUS.DISABLE,
+  },
+];

@@ -22,8 +22,8 @@ import { get } from 'lodash-es'
 import { FC } from 'react'
 
 import { getUserList } from '@/services/system/user-management'
-import { STATUS_OPTS } from '@/utils/const'
-import { INTERNATION, STATUS } from '@/utils/enums'
+import { GPT_USER_STATUS_OPTS } from '@/utils/const'
+import { GPTUSERSTATUS, INTERNATION, STATUS } from '@/utils/enums'
 
 /**
  * @description: 父级
@@ -61,12 +61,12 @@ export const ProFormStatus: FC<ProFormRadioGroupProps> = (props) => {
     <ProFormRadio.Group
       name="status"
       colProps={{ span: 8 }}
-      initialValue={STATUS.NORMAL}
+      initialValue={GPTUSERSTATUS.NORMAL}
       fieldProps={{
         buttonStyle: 'solid',
       }}
       label={formatMessage({ id: INTERNATION.STATUS })}
-      options={STATUS_OPTS}
+      options={GPT_USER_STATUS_OPTS}
       {...props}
     />
   )

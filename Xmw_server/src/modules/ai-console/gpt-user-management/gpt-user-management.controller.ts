@@ -82,22 +82,22 @@ export class GPTUserManagementController {
    * @description: 更新用户数据
    * @author: 白雾茫茫丶
    */
-  // @UseGuards(AuthGuard('jwt'))
-  // @Put('/:user_id')
-  // @ApiOkResponse({ type: UpdateResponseDto })
-  // @ApiOperation({ summary: '更新用户数据' })
-  // async updateUser(
-  //   @Param('user_id') user_id: string,
-  //   @Body() userInfo: SaveUserManagementDto,
-  //   @Session() session: SessionTypes,
-  // ) {
-  //   const response = await this.userManagementService.updateUser(
-  //     user_id,
-  //     userInfo,
-  //     session,
-  //   );
-  //   return response;
-  // }
+  @UseGuards(AuthGuard('jwt'))
+  @Put('/:id')
+  @ApiOkResponse({ type: UpdateResponseDto })
+  @ApiOperation({ summary: '更新用户数据' })
+  async updateGPTUser(
+    @Param('id') id: string,
+    @Body() userInfo: SaveGPTUserManagementDto,
+    @Session() session: SessionTypes,
+  ) {
+    const response = await this.userManagementService.updateGPTUser(
+      id,
+      userInfo,
+      session,
+    );
+    return response;
+  }
 
   /**
    * @description: 删除用户数据

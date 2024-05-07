@@ -10,7 +10,7 @@ import { ProFormDigit, ProFormRadio, ProFormText } from '@ant-design/pro-compone
 import { useIntl } from '@umijs/max'
 import type { FC } from 'react';
 
-import { ProFormSort, ProFormStatus } from '@/components/CommonProForm'
+import { ProFormStatus } from '@/components/GPT/ProForm'
 import { formatPerfix } from '@/utils'
 import { SEX_OPTS } from '@/utils/const'
 import { INTERNATION, ROUTES, SEX } from '@/utils/enums'
@@ -101,7 +101,7 @@ const PersonalInformation: FC<{ disabledField?: boolean }> = ({ disabledField = 
 			/> */}
 			{/* 手机号码 */}
 			<ProFormText
-				name="phone"
+				name="username"
 				colProps={{ span: 12 }}
 				label={formatMessage({ id: formatPerfix(ROUTES.USERMANAGEMENT, 'phone') })}
 				placeholder={formatMessage({ id: INTERNATION.PLACEHOLDER }) +

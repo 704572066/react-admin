@@ -27,15 +27,15 @@ export const getUserList = (options?: SearchParams) =>
  * @param {API.USERMANAGEMENT} options
  * @Author: 白雾茫茫丶
  */
-export const createGPTUser = (options: API.USERMANAGEMENT) => httpRequest.post<API.USERMANAGEMENT>(`${baseURL}`, options);
+export const createGPTUser = (options: API.GPTUSERMANAGEMENT) => httpRequest.post<API.GPTUSERMANAGEMENT>(`${baseURL}`, options);
 
 /**
  * @description: 更新用户数据
  * @param {API.USERMANAGEMENT} options
  * @Author: 白雾茫茫丶
  */
-export const updateUser = ({ user_id, ...options }: Partial<API.USERMANAGEMENT>) =>
-  httpRequest.put<number[]>(`${baseURL}/${user_id}`, options);
+export const updateGPTUser = ({ id, ...options }: Partial<API.GPTUSERMANAGEMENT>) =>
+  httpRequest.put<number[]>(`${baseURL}/${id}`, options);
 
 /**
  * @description: 删除用户数据

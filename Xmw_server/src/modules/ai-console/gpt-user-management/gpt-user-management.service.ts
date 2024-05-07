@@ -251,42 +251,46 @@ export class UserManagementService {
    * @description: 更新用户数据
    * @author: 白雾茫茫丶
    */
-  // async updateUser(
-  //   user_id: string,
-  //   userInfo: SaveGPTUserManagementDto,
-  //   session: SessionTypes,
-  // ): Promise<Response<number[]>> {
-  //   // 解构参数
-  //   const { user_name, work_no, phone } = userInfo;
-  //   if (user_name && work_no && phone) {
-  //     // 用户名称和用户工号、手机号码不能相同
-  //     const exist = await this.userModel.findOne({
-  //       where: {
-  //         [Op.or]: { user_name, work_no, phone },
-  //         user_id: {
-  //           [Op.ne]: user_id,
-  //         },
-  //       },
-  //     });
-  //     // 如果有结果，则证明已存在，这里存在两种情况，
-  //     if (exist) {
-  //       return responseMessage({}, '用户名称和用户工号、手机号码已存在!', -1);
-  //     }
-  //   }
-  //   // 如果通过则执行 sql save 语句
-  //   const result = await this.userModel.update(userInfo, {
-  //     where: { user_id },
-  //   });
-  //   // 更新 session 用户信息
-  //   session.currentUserInfo = { ...session.currentUserInfo, ...userInfo };
-  //   // 保存操作日志
-  //   // 根据主键查找出当前数据
-  //   const currentInfo = await this.userModel.findByPk(user_id);
-  //   await this.operationLogsService.saveLogs(
-  //     `编辑用户：${currentInfo.user_name}`,
-  //   );
-  //   return responseMessage(result);
-  // }
+  async updateGPTUser(
+    id: string,
+    userInfo: SaveGPTUserManagementDto,
+    session: SessionTypes,
+  ): Promise<Response<number[]>> {
+    // 解构参数
+    const { username, password, status } = userInfo;
+    if (username) {
+      // 用户名称和用户工号、手机号码不能相同
+      const exist = await this.prismaService.users.findFirst({
+        where: {
+          username,
+          id: { not: id}
+        }
+      });
+      // 如果有结果，则证明已存在，这里存在两种情况，
+      if (exist) {
+        return responseMessage({}, '用户名手机号码已存在!', -1);
+      }
+    }
+    let data = {}
+    if(password)
+      data = { username, status, password : hashStr(password) }
+    else
+      data = { username, status }
+    // 如果通过则执行 sql save 语句
+    const result = await this.prismaService.users.update({
+      where: { id },
+      data
+    });
+    // 更新 session 用户信息
+    // session.currentUserInfo = { ...session.currentUserInfo, ...userInfo };
+    // 保存操作日志
+    // 根据主键查找出当前数据
+    // const currentInfo = await this.userModel.findByPk(user_id);
+    await this.operationLogsService.saveLogs(
+      `编辑用户：${result.username}`,
+    );
+    return responseMessage(result);
+  }
 
   /**
    * @description: 删除角色数据

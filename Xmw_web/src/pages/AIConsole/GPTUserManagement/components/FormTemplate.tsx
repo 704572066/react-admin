@@ -15,7 +15,7 @@ import { FC } from 'react';
 
 import StrengthMeter from '@/components/StrengthMeter' // 密码强度校验
 import { renderFormTitle } from '@/components/TableColumns'
-import { createGPTUser, updateUser } from '@/services/ai-console/gpt-user-management'
+import { createGPTUser, updateGPTUser } from '@/services/ai-console/gpt-user-management'
 import { encryptionAesPsd, formatPerfix, hashStr, isSuccess } from '@/utils'
 import { ROUTES } from '@/utils/enums'
 import type { FormTemplateProps } from '@/utils/types/system/user-management'
@@ -32,17 +32,17 @@ const FormTemplate: FC<FormTemplateProps> = ({
 	// hooks 调用
 	const { message } = App.useApp();
 	// 获取表单全部字段
-	const { user_id, user_name } =
-		get(stepFormMapRef, 'current.[0].current')?.getFieldsValue(['user_id', 'user_name']) || {}
+	const { id, username } =
+		get(stepFormMapRef, 'current.[0].current')?.getFieldsValue(['id', 'username']) || {}
 	// 渲染标题
-	const formTitle = renderFormTitle(ROUTES.USERMANAGEMENT, user_id, user_name)
+	const formTitle = renderFormTitle(ROUTES.GPTUSERMANAGEMENT, id, username)
 
 	// 提交表单
-	const handlerSubmit = async (values: API.USERMANAGEMENT) => {
-		// 将密码加密
-		values.password = hashStr(values.password)
+	const handlerSubmit = async (values: API.GPTUSERMANAGEMENT) => {
+		// 将密码加密 编辑状态密码允许空，不更新数据库
+		values.password = id && !values.password ? '' : hashStr(values.password)
 		// 提交数据
-		await (user_id ? updateUser : createGPTUser)({ ...values, user_id }).then(({ code, msg }) => {
+		await (id ? updateGPTUser : createGPTUser)({ ...values, id }).then(({ code, msg }) => {
 			if (isSuccess(code)) {
 				message.success(msg);
 				reloadTable()
@@ -58,7 +58,7 @@ const FormTemplate: FC<FormTemplateProps> = ({
 	const StepComponents = [
 		// 个人信息
 		{
-			title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.personal-information'),
+			title: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'steps-form.personal-information'),
 			component: <PersonalInformation />,
 		},
 		// 用户信息
@@ -73,8 +73,8 @@ const FormTemplate: FC<FormTemplateProps> = ({
 		// },
 		// 设置密码
 		{
-			title: formatPerfix(ROUTES.USERMANAGEMENT, 'steps-form.set-password'),
-			component: <StrengthMeter />,
+			title: formatPerfix(ROUTES.GPTUSERMANAGEMENT, 'steps-form.set-password'),
+			component: <StrengthMeter allowEmptyPassword = {id ? true : false} />,
 		},
 	]
 

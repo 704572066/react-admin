@@ -19,7 +19,11 @@ import { INTERNATION, ROUTES } from '@/utils/enums'
 import { strengthMeterOptions } from './config'
 import styles from './index.module.less'
 
-const StrengthMeter: FC = () => {
+interface PropsType {
+  allowEmptyPassword?: boolean
+}
+
+const StrengthMeter: FC<PropsType> = ({allowEmptyPassword = false}) => {
   const { formatMessage } = useIntl();
   // 获取上下文 form 实例
   const form = Form.useFormInstance();
@@ -35,6 +39,13 @@ const StrengthMeter: FC = () => {
     // score得分只有0~4，且只有整数范围并没有小数
     return (analysisValue.score + 1) * 20
   }
+  // 定义输入密码时的回调事件
+  // const passWordChange: any = () => {
+  //   const confirmPasswordValue = form.getFieldValue('confirmPassword') // 获取确认密码的值
+  //   if (confirmPasswordValue) {
+  //       form.validateFields(['confirmPassword']);// 使用form.validateFields（），一个参数时校验某一项，若不传参则校验全部
+  //   }
+  // }
 
   return (
     <>
@@ -44,7 +55,7 @@ const StrengthMeter: FC = () => {
         name="password"
         rules={[
           {
-            required: true, min: 6, max: 12,
+            required: !password && allowEmptyPassword ? false : true, min: 6, max: 12,
             message: formatMessage({ id: INTERNATION.PLACEHOLDER }) +
               formatMessage({ id: `${formatPerfix(ROUTES.USERMANAGEMENT)}.password.rules` }),
           },
@@ -57,7 +68,7 @@ const StrengthMeter: FC = () => {
         fieldProps={{ visibilityToggle: false }}
         rules={[
           {
-            required: true,
+            required: !password && allowEmptyPassword ? false : true,
             message: formatMessage({ id: INTERNATION.PLACEHOLDER }) +
               formatMessage({ id: `${formatPerfix(ROUTES.USERMANAGEMENT)}.confirm-password` }),
           },
