@@ -6,28 +6,33 @@
  * @LastEditors: 白雾茫茫丶
  * @LastEditTime: 2023-09-28 17:26:15
  */
+
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import type { WhereOptions } from 'sequelize/types';
 import { Sequelize } from 'sequelize-typescript';
 
+import { XmwMenu } from '@/models/xmw_menu.model'; // xmw_menu 实体
 import { XmwPermission } from '@/models/xmw_permission.model';
 import { XmwRole } from '@/models/xmw_role.model'; // xmw_role 实体
 import { OperationLogsService } from '@/modules/system/operation-logs/operation-logs.service'; // OperationLogs Service
-import { responseMessage } from '@/utils'; // 全局工具函数
+import { findParentIds, responseMessage } from '@/utils'; // 全局工具函数
 import type {
   PageResponse,
   Response,
   SessionTypes,
   Status,
 } from '@/utils/types';
+import { MenuItem } from '@/utils/types/system';
 
 import { ListRoleManagementDto, SaveRoleManagementDto } from './dto';
+
 
 type permissionModel = {
   role_id: string;
   menu_id: string;
+  menu_check: number;
 };
 
 @Injectable()
@@ -39,6 +44,10 @@ export class RoleManagementService {
 
     @InjectModel(XmwPermission)
     private readonly permissionModel: typeof XmwPermission,
+
+    @InjectModel(XmwMenu)
+    private readonly menuModel: typeof XmwMenu,
+
 
     private sequelize: Sequelize,
     private readonly operationLogsService: OperationLogsService,
@@ -68,6 +77,7 @@ export class RoleManagementService {
     if (status) where.status = { [Op.eq]: status };
     if (start_time && end_time)
       where.created_time = { [Op.between]: [start_time, end_time] };
+    // where.menu_check = { [Op.eq]: 0 };
     // 分页查询数据
     const count = await this.roleModel.count();
     const list = await this.roleModel.findAll({
@@ -76,6 +86,9 @@ export class RoleManagementService {
         {
           model: XmwPermission,
           as: 'menu_permission',
+          where: {
+            menu_check: 0
+          }
         },
       ],
       offset: (Number(current) - 1) * pageSize,
@@ -103,6 +116,21 @@ export class RoleManagementService {
     const exist = await this.roleModel.findOne({
       where: { [Op.or]: { role_name, role_code } },
     });
+
+     // // 获取menu_id和parent_id
+     const sqlData = await this.menuModel.findAll({
+      attributes: {
+        include: ['menu_id', 'parent_id'],
+      },
+    });
+    const menuItems: MenuItem[] = sqlData.map(
+      (s) => {
+        return { menu_id:s.menu_id, parent_id:s.parent_id };
+      },
+    );
+    const parentIds = findParentIds(menuItems, menu_permission)
+    const filteredParentIds = new Set([...parentIds].filter(str => !new Set(...menu_permission).has(str)));
+
     // 如果有结果，则证明已存在，这里存在两种情况，
     if (exist) {
       return responseMessage({}, '角色名称或角色编码已存在!', -1);
@@ -119,9 +147,12 @@ export class RoleManagementService {
       // 再把角色对应的权限插入到 xmw_permission 中
       const permissionData: permissionModel[] = menu_permission.map(
         (menu_id: string) => {
-          return { role_id: result.role_id, menu_id };
+          return { role_id: result.role_id, menu_id, menu_check:0 };
         },
       );
+      for(const item in filteredParentIds){
+        permissionData.push({role_id: result.role_id, menu_id:item, menu_check:1})
+      }
       await this.permissionModel.bulkCreate(permissionData, { transaction: t });
       // 如果执行到此行,且没有引发任何错误,提交事务
       await t.commit();
@@ -152,6 +183,20 @@ export class RoleManagementService {
         role_id: { [Op.ne]: role_id },
       },
     });
+
+    // // 获取menu_id和parent_id
+    const sqlData = await this.menuModel.findAll({
+      attributes: {
+        include: ['menu_id', 'parent_id'],
+      },
+    });
+    const menuItems: MenuItem[] = sqlData.map(
+      (s) => {
+        return { menu_id:s.menu_id, parent_id:s.parent_id };
+      },
+    );
+    const parentIds = findParentIds(menuItems, menu_permission)
+    const filteredParentIds = new Set([...parentIds].filter(str => !new Set(...menu_permission).has(str)));
     // 如果有结果，则证明已存在，这里存在两种情况，
     if (exist) {
       return responseMessage({}, '角色名称或角色编码已存在!', -1);
@@ -173,9 +218,12 @@ export class RoleManagementService {
       // 再把角色对应的权限插入到 xmw_permission 中
       const permissionData: permissionModel[] = menu_permission.map(
         (menu_id: string) => {
-          return { role_id, menu_id };
+          return { role_id, menu_id, menu_check:0 };
         },
       );
+      for(const item of filteredParentIds){
+        permissionData.push({role_id, menu_id:item, menu_check:1})
+      }
       await this.permissionModel.bulkCreate(permissionData, { transaction: t });
       // 如果执行到此行,且没有引发任何错误,提交事务
       await t.commit();

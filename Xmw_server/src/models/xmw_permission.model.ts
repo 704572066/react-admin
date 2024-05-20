@@ -46,6 +46,16 @@ export class XmwPermission
   @Column({ type: DataType.UUID, comment: '菜单id' })
   menu_id: string;
 
+  //菜单状态
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    comment: '菜单状态（0:不过滤，1：过滤）',
+  })
+  menu_check: number;
+
+
   @BelongsTo(() => XmwRole)
   roleInfo: XmwRole;
 }

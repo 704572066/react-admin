@@ -132,3 +132,8 @@ export type LogsAttributes = {
   api_url: string; // 请求地址
 } & Times &
   Pick<UserAttributes, 'user_id'>;
+
+export type MenuItem = {
+  menu_id: string; // 菜单id
+  parent_id: string; // 父菜单id
+}

@@ -13,6 +13,7 @@ import * as fs from 'fs';
 import { XmwInternational } from '@/models/xmw_international.model'; // 数据库实体
 import { REQUEST_CODE, REQUEST_MSG } from '@/utils/enums';
 import type { Response } from '@/utils/types';
+import type { MenuItem } from '@/utils/types/system';
 
 /**
  * @description: 统一返回体
@@ -119,3 +120,27 @@ export const formatPrice = (val = 0, multiple = 1) => {
 export const hashStr = (str: string) => {
   return crypto.createHash('sha256').update(str).digest('hex');
 };
+
+
+export const findParentIds = (menuItems: MenuItem[], menuIds: string[]): Set<string> => {
+  const parentIds = new Set<string>();
+
+  function findParents(menuId: string) {
+      for (const menuItem of menuItems) {
+          if (menuItem.menu_id === menuId && menuItem.parent_id) {
+              parentIds.add(menuItem.parent_id);
+              findParents(menuItem.parent_id);
+          }
+      }
+  }
+
+  for (const menuId of menuIds) {
+      findParents(menuId);
+  }
+
+  return parentIds;
+}
+
+// 示例使用
+// const menuIds = ["4", "6"];
+// const parentIds = findParentIds(menuItems, menuIds);
