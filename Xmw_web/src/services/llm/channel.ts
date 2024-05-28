@@ -44,7 +44,7 @@ export const getChannelList = (options?: SearchParams) =>
 //  * @param {string} role_id
 //  * @Author: 白雾茫茫丶
 //  */
-export const delChannel = (role_id: string) => httpRequest.delete<number>(`${baseURL}/${role_id}`);
+export const delChannel = (id: number) => httpRequest.delete<number>(`${baseURL}/${id}`);
 
 // /**
 //  * @description: 设置角色状态

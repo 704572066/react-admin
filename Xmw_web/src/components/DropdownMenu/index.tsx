@@ -19,7 +19,7 @@ import type { PathNames, Response } from '@/utils/types'
 
 type DeleteParams = {
   request: (id: string) => Promise<Response>; // 删除接口 
-  id: string; // 删除 id 字段
+  id: string|number; // 删除 id 字段
 }
 
 export type DropdownMenuProps = {

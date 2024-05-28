@@ -412,7 +412,7 @@ const TableTemplate: FC = () => {
 					}}
 					deleteParams={{
 						request: delChannel,
-						id: record.id.toLocaleString(),
+						id: record.id,
 					}}
 					reloadTable={reloadTable}
 				/>

@@ -12,6 +12,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AxiosRequestConfig } from 'axios';
 
+import { Abilities } from '@/models/abilities.model';
 // import { XmwMenu } from '@/models/xmw_menu.model'; // xmw_role 实体
 // import { XmwPermission } from '@/models/xmw_permission.model'; // xmw_permission 实体
 import { Channels } from '@/models/channels.model'; // Channel 实体
@@ -23,7 +24,7 @@ import { ChannelsService } from './channels.service'; // RoleManagement Service
 @Module({
   // 将实体 导入到这个module中，以便你这个module中的其它provider使用
   imports: [
-    SequelizeModule.forFeature([Channels]),
+    SequelizeModule.forFeature([Channels, Abilities]),
     OperationLogsModule,
     HttpModule.registerAsync({
       imports: [ConfigModule],

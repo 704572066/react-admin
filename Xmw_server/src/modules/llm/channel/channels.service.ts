@@ -13,6 +13,7 @@ import { Op } from 'sequelize';
 import type { WhereOptions } from 'sequelize/types';
 import { Sequelize } from 'sequelize-typescript';
 
+import { Abilities } from '@/models/abilities.model';
 // import { XmwMenu } from '@/models/xmw_menu.model'; // xmw_menu 实体
 // import { XmwPermission } from '@/models/xmw_permission.model';
 import { Channels } from '@/models/channels.model'; // xmw_role 实体
@@ -42,8 +43,8 @@ export class ChannelsService {
     @InjectModel(Channels)
     private readonly channelModel: typeof Channels,
 
-    // @InjectModel(XmwPermission)
-    // private readonly permissionModel: typeof XmwPermission,
+    @InjectModel(Abilities)
+    private readonly abilitiesModel: typeof Abilities,
 
     // @InjectModel(XmwMenu)
     // private readonly menuModel: typeof XmwMenu,
@@ -170,6 +171,40 @@ export class ChannelsService {
       }`,
     );
     return responseMessage(result);
+  }
+
+  /**
+   * @description: 删除渠道
+   * @author: guj
+   */
+  async deleteChannel(id: number): Promise<Response<number>> {
+    // 开始一个事务并将其保存到变量中
+    const t = await this.sequelize.transaction();
+    try {
+      // 先删除 xmw_permission 表关联的数据
+      await this.abilitiesModel.destroy({
+        where: { channel_id: id },
+        transaction: t,
+      });
+      // 根据主键查找出当前数据
+      const currentInfo = await this.channelModel.findByPk(id);
+      // 再删除 xmw_role 关联的数据
+      const result = await this.channelModel.destroy({
+        where: { id },
+        transaction: t,
+      });
+      // 如果执行到此行,且没有引发任何错误,提交事务
+      await t.commit();
+      // 保存操作日志
+      await this.operationLogsService.saveLogs(
+        `删除渠道：${currentInfo.name}`,
+      );
+      return responseMessage(result);
+    } catch (error) {
+      // 如果执行到达此行,则抛出错误,回滚事务
+      await t.rollback();
+      return responseMessage({}, error, -1);
+    }
   }
 
 

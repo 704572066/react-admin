@@ -120,17 +120,17 @@ export class ChannelController {
   // }
 
   /**
-   * @description: 删除角色数据
-   * @author: 白雾茫茫丶
+   * @description: 删除渠道
+   * @author: guj
    */
-  // @UseGuards(AuthGuard('jwt'))
-  // @Delete('/:role_id')
-  // @ApiOkResponse({ type: DeleteResponseDto })
-  // @ApiOperation({ summary: '删除角色数据' })
-  // async deleteRole(@Param('role_id') role_id: string) {
-  //   const response = await this.roleManagementService.deleteRole(role_id);
-  //   return response;
-  // }
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('/:id')
+  @ApiOkResponse({ type: DeleteResponseDto })
+  @ApiOperation({ summary: '删除渠道' })
+  async deleteRole(@Param('id') id: number) {
+    const response = await this.channelsService.deleteChannel(id);
+    return response;
+  }
 
   /**
    * @description: 更新角色状态
@@ -188,4 +188,5 @@ export class ChannelController {
        );
        return response;
      }
+
 }
