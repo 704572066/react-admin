@@ -29,7 +29,7 @@ import defaultSettings from '../../../config/defaultSettings';
 export const statusColumn: ProColumns = {
   title: <FormattedMessage id={INTERNATION.STATUS} />,
   dataIndex: 'status',
-  width: 100,
+  width: 60,
   filters: true,
   onFilter: true,
   align: 'center',

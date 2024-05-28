@@ -58,4 +58,13 @@ export default {
       delete: 'system:internationalization:delete', // 删除
     },
   },
+  llm: {
+    // 渠道管理
+    'channel': {
+      add: 'llm:channel:add', // 新建
+      edit: 'llm:channel:edit', // 编辑
+      delete: 'llm:channel:delete', // 删除
+    },
+  },
+
 }

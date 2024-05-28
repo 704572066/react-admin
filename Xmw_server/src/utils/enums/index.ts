@@ -39,6 +39,16 @@ export enum STATUS {
 }
 
 /**
+ * @description: 渠道状态
+ * @author: 白雾茫茫丶
+ */
+export enum CHANNEL_STATUS {
+  ENABLE = 1, // 启用
+  MANUAL = 2, // 手动
+}
+
+
+/**
  * @description: 是否
  * @author: 白雾茫茫丶
  */

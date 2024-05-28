@@ -18,6 +18,7 @@ import { GPTDataSetManagementModule } from '@/modules/ai-console/gpt-dataset-man
 import { GPTUserManagementModule } from '@/modules/ai-console/gpt-user-management/gpt-user-management.module'; // GPT-用户管理
 import { AuthModule } from '@/modules/auth/auth.module'; // 用户鉴权
 import { FilesModule } from '@/modules/files/files.module'; // 文件上传
+import { ChannelsModule } from '@/modules/llm/channel/channels.module'; // 大模型-渠道管理
 import { RedisCacheModule } from '@/modules/redis-cache/redis-cache.module'; // redis 缓存
 import { InternationalModule } from '@/modules/system/international/international.module'; // 系统设置-国际化
 import { MenuManagementModule } from '@/modules/system/menu-management/menu-management.module'; // 系统设置-菜单管理
@@ -61,6 +62,7 @@ import { PrismaModule } from './npx/prisma/prisma.module';
     GPTAppManagementModule,
     GPTDataSetManagementModule,
     PrismaModule,
+    ChannelsModule,
   ],
 })
 export class AppModule {}

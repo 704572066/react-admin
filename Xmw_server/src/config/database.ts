@@ -15,7 +15,7 @@ export default registerAs('database', () => ({
   username: process.env.DATABASE_NAME,
   password: process.env.DATABASE_PWD,
   database: process.env.DATABASE_LIB,
-  models: [__dirname + '/models/*.model{.ts,.js}'], // 导入所有模型
+  models: [__dirname + '/models/xmw*.model{.ts,.js}'], // 导入所有模型
   logging: true,
   define: {
     timestamps: true, // 是否自动创建时间字段， 默认会自动创建createdAt、updatedAt

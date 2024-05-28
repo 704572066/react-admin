@@ -14,3 +14,6 @@ declare module 'crypto-js'
 declare module 'nprogress';
 declare module 'zxcvbn';
 declare module 'lodash-es';
+declare module '@/utils/oneapi/constants/channel';
+declare module '@/utils/oneapi/common';
+declare module '@/components/oneapi/ResponseTimeLabel';

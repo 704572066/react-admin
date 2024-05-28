@@ -63,6 +63,7 @@ export enum ROUTES {
   GPTUSERMANAGEMENT = '/ai-console/gpt-user-management', // gpt-用户管理
   GPTAPPMANAGEMENT = '/ai-console/gpt-app-management', // gpt-应用管理
   GPTDATASETMANAGEMENT = '/ai-console/gpt-dataset-management', // gpt-应用管理
+  CHANNEL = '/llm/channel',
 }
 
 /**
@@ -71,6 +72,7 @@ export enum ROUTES {
  */
 export enum INTERNATION {
   OPERATION = 'global.table.operation', // 操作
+  TEST = 'global.table.test', // 测试
   STATUS = 'global.status', // 状态
   STATUS_DISABLE = 'global.status.disable', // 禁用
   STATUS_NORMAL = 'global.status.normal', // 正常
@@ -124,6 +126,15 @@ export enum LOGIN_TYPE {
 export enum STATUS {
   DISABLE, // 禁用
   NORMAL, // 正常
+}
+
+/**
+ * @description: 渠道状态
+ * @author: 白雾茫茫丶
+ */
+export enum CHANNEL_STATUS {
+  ENABLE = 1, // 启用
+  MANUAL = 2, // 手动
 }
 
 /**
