@@ -81,6 +81,19 @@ export class ChannelController {
       return response;
     }
 
+        /**
+   * @description: 获取模型列表
+   * @author: guj
+   */
+        @UseGuards(AuthGuard('jwt'))
+        @Get('/models')
+        @ApiOkResponse({ type: ResponseChannelDto })
+        @ApiOperation({ summary: '获取模型列表' })
+        async getModels() {
+          const response = await this.httpService.get('/api/channel/models');
+          return response;
+        }
+
   /**
    * @description: 创建角色数据
    * @author: 白雾茫茫丶
@@ -133,7 +146,7 @@ export class ChannelController {
   }
 
   /**
-   * @description: 更新角色状态
+   * @description: 更新渠道状态
    * @author: 白雾茫茫丶
    */
   @UseGuards(AuthGuard('jwt'))

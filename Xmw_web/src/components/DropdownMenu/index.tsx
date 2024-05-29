@@ -18,7 +18,7 @@ import permissions from '@/utils/permission'
 import type { PathNames, Response } from '@/utils/types'
 
 type DeleteParams = {
-  request: (id: string) => Promise<Response>; // 删除接口 
+  request: (id: string|number) => Promise<Response>; // 删除接口 
   id: string|number; // 删除 id 字段
 }
 

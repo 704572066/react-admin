@@ -15,42 +15,42 @@ import { httpRequest } from '@/utils/umiRequest'
 const baseURL = ROUTES.CHANNEL
 
 /**
- * @description:  获取角色列表
+ * @description:  获取渠道列表
  * @param {SearchParams} options
- * @Author: 白雾茫茫丶
+ * @Author: guj
  */
 export const getChannelList = (options?: SearchParams) =>
   httpRequest.get<PageResponse<API.CHANNEL>>(`${baseURL}`, options);
 
-// /**
-//  * @description: 新增角色数据
-//  * @param {API.ROLEMANAGEMENT} options
-//  * @Author: 白雾茫茫丶
-//  */
-// export const createRole = (
-//   options: Omit<API.ROLEMANAGEMENT, 'role_id' | 'founder' | 'created_time' | 'updated_time'>,
-// ) => httpRequest.post<API.ROLEMANAGEMENT>(`${baseURL}`, options);
+/**
+ * @description: 新增渠道
+ * @param {API.CHANNEL} options
+ * @Author: guj
+ */
+export const createChannel = (
+  options: Omit<API.CHANNEL, 'id' | 'created_time' | 'updated_time'>,
+) => httpRequest.post<API.CHANNEL>(`${baseURL}`, options);
 
-// /**
-//  * @description: 更新角色数据
-//  * @param {API.ROLEMANAGEMENT} options
-//  * @Author: 白雾茫茫丶
-//  */
-// export const updateRole = ({ role_id, ...options }: API.ROLEMANAGEMENT) =>
-//   httpRequest.put<number[]>(`${baseURL}/${role_id}`, options);
+/**
+ * @description: 更新渠道
+ * @param {API.CHANNEL} options
+ * @Author: guj
+ */
+export const updateChannel = ({ id, ...options }: API.CHANNEL) =>
+  httpRequest.put<number[]>(`${baseURL}/${id}`, options);
 
-// /**
-//  * @description: 删除角色数据
-//  * @param {string} role_id
-//  * @Author: 白雾茫茫丶
-//  */
+/**
+ * @description: 删除渠道
+ * @param {number} id
+ * @Author: guj
+ */
 export const delChannel = (id: number) => httpRequest.delete<number>(`${baseURL}/${id}`);
 
-// /**
-//  * @description: 设置角色状态
-//  * @param {Data} options
-//  * @Author: 白雾茫茫丶
-//  */
+/**
+ * @description: 设置渠道状态
+ * @param {Data} options
+ * @Author: guj
+ */
 export const setChannelStatus = ({ id, status }: ChannelStatusParams) =>
   httpRequest.patch<number[]>(`${baseURL}/${id}`, { status });
 
@@ -63,3 +63,6 @@ export const setChannelWeight = ({ id, weight }: ChannelWeightParams) =>
 
 export const setChannelPriority = ({ id, priority }: ChannelPriorityParams) =>
   httpRequest.patch<number[]>(`${baseURL}/priority/${id}`, { priority });
+
+export const getModels = () =>
+  httpRequest.get<any>(`${baseURL}/models`);

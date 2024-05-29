@@ -10,14 +10,16 @@
 import { ModalForm } from '@ant-design/pro-components';
 import { App, Form } from 'antd';
 import type { FC } from 'react';
+import { useEffect,useState } from 'react';
 
+import EditModal from '@/components/oneapi/EditModal'
 import { renderFormTitle } from '@/components/TableColumns'
-import { createRole, updateRole } from '@/services/system/role-management'
+import { createChannel, updateChannel } from '@/services/llm/channel'
 import { isSuccess } from '@/utils'
 import { ROUTES } from '@/utils/enums'
 import type { FormTemplateProps } from '@/utils/types/system/role-management'
 
-import FormTemplateItem from './FormTemplateItem' // 表单组件 
+// import FormTemplateItem from './FormTemplateItem' // 表单组件 
 
 const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerFalse }) => {
 	// hooks 调用
@@ -25,9 +27,9 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 	// 上下文表单实例
 	const form = Form.useFormInstance()
 	// 获取表单全部字段
-	const { role_id, role_name } = form.getFieldsValue(true)
+	const { id, name } = form.getFieldsValue(true)
 	// 渲染标题
-	const formTitle = renderFormTitle(ROUTES.MENUMANAGEMENT, role_id, role_name)
+	const formTitle = renderFormTitle(ROUTES.CHANNEL, id, name)
 
 	// 关闭抽屉浮层
 	const handlerClose = () => {
@@ -36,11 +38,21 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 		// 重置表单
 		form.resetFields();
 	}
+	const [groupOptions, setGroupOptions] = useState<string[]>([]);
+	// const fetchGroups = async () => {
+  //   try {
+  //     // const res = await API.get(`/api/group/`);
+  //     setGroupOptions(['a','b']);
+  //   } catch (error) {
+  //     message.error('error.message');
+  //   }
+  // };
+
 
 	// 提交表单
-	const handlerSubmit = async (values: API.ROLEMANAGEMENT): Promise<void> => {
+	const handlerSubmit = async (values: API.CHANNEL): Promise<void> => {
 		// 提交数据
-		await (role_id ? updateRole : createRole)({ ...values, role_id }).then(({ code, msg }) => {
+		await (id ? updateChannel : createChannel)({ ...values, id }).then(({ code, msg }) => {
 			if (isSuccess(code)) {
 				message.success(msg);
 				// 刷新表格
@@ -51,9 +63,9 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 		})
 	}
 	return (
-		<ModalForm<API.ROLEMANAGEMENT>
+		<ModalForm<API.CHANNEL>
 			title={formTitle}
-			width={500}
+			width={800}
 			grid
 			form={form}
 			open={open}
@@ -66,7 +78,8 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 			submitTimeout={2000}
 			onFinish={handlerSubmit}
 		>
-			<FormTemplateItem />
+			{/* <FormTemplateItem /> */}
+			<EditModal channelId={id} groupOptions={groupOptions}/>
 		</ModalForm>
 	);
 };
