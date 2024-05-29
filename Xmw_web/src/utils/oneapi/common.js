@@ -74,3 +74,26 @@ export function timestamp2string(timestamp) {
   }
   return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 }
+
+export function trims(values) {
+  if (typeof values === 'string') {
+    return values.trim();
+  }
+
+  if (Array.isArray(values)) {
+    return values.map((value) => trims(value));
+  }
+
+  if (typeof values === 'object') {
+    const newValues = {};
+    for (const key in values) {
+      // 在 JavaScript 和 TypeScript 中，当你使用 for-in 循环遍历对象的属性时，它不仅会遍历对象自身的可枚举属性，还会遍历其原型链上的可枚举属性。为了避免遍历原型链上的属性，需要在循环体内使用 hasOwnProperty 方法进行检查。
+      if (values.hasOwnProperty(key)) {
+        newValues[key] = trims(values[key]);
+      }
+    }
+    return newValues;
+  }
+
+  return values;
+}

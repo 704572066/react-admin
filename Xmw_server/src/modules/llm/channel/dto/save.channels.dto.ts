@@ -9,53 +9,154 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import type { ChannelStatus } from '@/utils/types/llm';
+// import { json } from 'sequelize';
+// import { json } from 'sequelize';
+import { JSON } from 'sequelize';
+// import { json } from 'sequelize';
 
 /**
  * @description: 保存角色数据 Dto
  * @author: 白雾茫茫丶
  */
 export class SaveChannelDto {
+  // @ApiProperty({
+  //   type: Number,
+  //   description: 'id',
+  // })
+  // id: number;
+
   @ApiProperty({
-    type: String,
-    description: '角色名称',
-    default: '超级管理员',
+    type: Number,
+    description: '渠道类型',
   })
-  role_name: string;
+  type: number;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: '状态',
+  //   default: 1,
+  // })
+  // status: number;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: '创建时间',
+  // })
+  // created_time: number;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: '测试时间',
+  // })
+  // test_time: number;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: '响应时间',
+  // })
+  // response_time: number;
 
   @ApiProperty({
     type: String,
-    description: '角色编码',
-    default: 'Super Admin',
+    description: 'base_url',
   })
-  role_code: string;
+  base_url: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'other',
+  })
+  other: string;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: 'balance',
+  // })
+  // balance: number;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: 'balance_updated_time',
+  // })
+  // balance_updated_time: number;
+
+  @ApiProperty({
+    type: String,
+    description: 'models',
+  })
+  models: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'key',
+  })
+  key: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'group',
+  })
+  group: string;
 
   @ApiProperty({
     type: Array,
-    description: '菜单权限',
-    default: ['79581210-60b7-4c66-b6ae-14b013c3661e'],
+    description: 'groups',
   })
-  menu_permission: string[];
+  groups: string[];
 
-  @ApiProperty({
-    type: Number,
-    description: '排序',
-    default: 1,
-  })
-  sort: number;
-
-  @ApiProperty({
-    type: Number,
-    description: '角色状态',
-    default: 1,
-  })
-  status: ChannelStatus;
+  // @ApiProperty({
+  //   type: Number,
+  //   description: 'used_quota',
+  // })
+  // used_quota: number;
 
   @ApiProperty({
     type: String,
-    description: '角色描述',
-    default: '拥有系统全部权限',
+    description: 'model_mapping',
   })
-  describe: string;
+  model_mapping: string;
+
+  // @ApiProperty({
+  //   type: Number,
+  //   description: 'priority',
+  // })
+  // priority: number;
+
+  @ApiProperty({
+    type: String,
+    description: 'proxy',
+  })
+  proxy: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'name',
+  })
+  name: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'test_model',
+  })
+  test_model: string;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'only_chat',
+  })
+  only_chat: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'is_edit',
+  })
+  is_edit: boolean;
+
+  @ApiProperty({
+    type: String,
+    description: 'plugin',
+  })
+  plugin: string;
 }
 
 /**

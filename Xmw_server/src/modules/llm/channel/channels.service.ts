@@ -59,7 +59,7 @@ export class ChannelsService {
    * @author: 白雾茫茫丶
    */
   async getChannelList(
-    roleInfo: ListChannelsDto,
+    channelInfo: ListChannelsDto,
   ): Promise<Response<PageResponse<Channels>>> {
     // 解构参数
     const {
@@ -70,7 +70,7 @@ export class ChannelsService {
       end_time,
       pageSize,
       current,
-    } = roleInfo;
+    } = channelInfo;
     // 拼接查询参数
     const where: WhereOptions = {};
     if (role_name) where.role_name = { [Op.substring]: role_name };
@@ -102,6 +102,31 @@ export class ChannelsService {
     });
     return responseMessage({ list, total: count });
   }
+
+  /**
+   * @description: 获取渠道
+   * @author: 白雾茫茫丶
+   */
+  async getChannel(
+    id: number,
+  ): Promise<Response<Channels>> {
+    
+    // const count = await this.channelModel.count();
+    const channel = await this.channelModel.findByPk(id);
+    return responseMessage(channel);
+  }
+
+  //   /**
+  //  * @description: 获取分组
+  //  * @author: guj
+  //  */
+  //   async getGroup(
+  //   ): Promise<Response<any>> {
+      
+  //     // const count = await this.channelModel.count();
+  //     const channel = await this.channelModel.findByPk(id);
+  //     return responseMessage(channel);
+  //   }
 
   /**
    * @description: 更新角色状态
@@ -206,6 +231,41 @@ export class ChannelsService {
       return responseMessage({}, error, -1);
     }
   }
+
+  /**
+   * @description: 创建角色数据
+   * @author: 白雾茫茫丶
+   */
+  // async createChannel(
+  //   { menu_permission, ...channelInfo }: SaveChannelDto,
+  
+  // ): Promise<Response<SaveChannelDto>> {
+  //   // 解构参数
+  //   const { role_name, role_code } = channelInfo;
+    
+  //   // 开始一个事务并将其保存到变量中
+  //   const t = await this.sequelize.transaction();
+  //   try {
+  //     // 执行 sql insert 语句,插入数据到 xmw_role 表中
+  //     const result = await this.channelModel.create(
+  //       { ...channelInfo },
+  //       { transaction: t },
+  //     );
+  //     // 再把角色对应的权限插入到 xmw_permission 中
+      
+  //     await this.abilitiesModel.bulkCreate(permissionData, { transaction: t });
+  //     // 如果执行到此行,且没有引发任何错误,提交事务
+  //     await t.commit();
+  //     // 保存操作日志
+  //     await this.operationLogsService.saveLogs(`创建渠道：${result.name}`);
+  //     return responseMessage(result);
+  //   } catch (error) {
+  //     // 如果执行到达此行,则抛出错误,回滚事务
+  //     await t.rollback();
+  //     return responseMessage({}, error, -1);
+  //   }
+  // }
+
 
 
 }

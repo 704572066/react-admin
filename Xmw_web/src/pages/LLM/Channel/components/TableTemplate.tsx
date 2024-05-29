@@ -260,6 +260,13 @@ const TableTemplate: FC = () => {
 			align: 'center',
 		},
 		{
+			dataIndex: 'id',
+			// valueType: 'indexBorder',
+			hideInTable: true,
+			width: 38,
+			align: 'center',
+		},
+		{
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'name') }),
 			dataIndex: 'name',
 			ellipsis: true,
@@ -404,10 +411,10 @@ const TableTemplate: FC = () => {
 				<DropdownMenu
 					pathName={ROUTES.CHANNEL}
 					editCallback={() => {
-						// form.setFieldsValue({
-						// 	...record,
-						// 	menu_permission: map(record.id, 'id'),
-						// });
+						form.setFieldsValue({
+							...record,
+							// menu_permission: map(record.id, 'id'),
+						});
 						setOpenDrawerTrue()
 					}}
 					deleteParams={{

@@ -31,13 +31,13 @@ import {
 
 import { DeleteResponseDto, UpdateResponseDto } from '@/dto/response.dto'; // 响应体 Dto
 
-// import type { SessionTypes } from '@/utils/types';
+import type { SessionTypes } from '@/utils/types';
 import { ChannelsService } from './channels.service'; // RoleManagement Service
 import {
   // CreateRoleManagementDto,
   ListChannelsDto,
   ResponseChannelDto,
-  // SaveRoleManagementDto,
+  SaveChannelDto,
   UpdateChannelStatusDto,
 } from './dto';
 
@@ -69,11 +69,24 @@ export class ChannelController {
   }
 
     /**
+   * @description: 获取渠道
+   * @author: guj
+   */
+    @UseGuards(AuthGuard('jwt'))
+    @Get('/items/:id')
+    @ApiOkResponse({ type: ResponseChannelDto })
+    @ApiOperation({ summary: '获取渠道' })
+    async getChannel(@Param('id') id: number) {
+      const response = await this.channelsService.getChannel(id);
+      return response;
+    }
+
+    /**
    * @description: 测试渠道
    * @author: 白雾茫茫丶
    */
     @UseGuards(AuthGuard('jwt'))
-    @Get('/:id')
+    @Get('/test/:id')
     @ApiOkResponse({ type: ResponseChannelDto })
     @ApiOperation({ summary: '测试渠道' })
     async testChannel(@Param('id') id: number, @Query('model') model: string) {
@@ -81,24 +94,48 @@ export class ChannelController {
       return response;
     }
 
-  /**
-   * @description: 创建角色数据
-   * @author: 白雾茫茫丶
+    /**
+   * @description: 获取分组
+   * @author: guj
    */
-  // @UseGuards(AuthGuard('jwt'))
-  // @Post()
-  // @ApiOkResponse({ type: CreateRoleManagementDto })
-  // @ApiOperation({ summary: '创建角色数据' })
-  // async createRole(
-  //   @Body() roleInfo: SaveRoleManagementDto,
-  //   @Session() session: SessionTypes,
-  // ) {
-  //   const response = await this.roleManagementService.createRole(
-  //     roleInfo,
-  //     session,
-  //   );
-  //   return response;
-  // }
+    @UseGuards(AuthGuard('jwt'))
+    @Get('/group')
+    @ApiOkResponse({ type: ResponseChannelDto })
+    @ApiOperation({ summary: '获取分组' })
+    async getGroup() {
+      const response = await this.httpService.get('/api/group');
+      return response;
+    }
+
+    
+
+  /**
+   * @description: 获取模型列表
+   * @author: guj
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/models')
+  @ApiOkResponse({ type: ResponseChannelDto })
+  @ApiOperation({ summary: '获取模型列表' })
+  async getModels() {
+    const response = await this.httpService.get('/api/channel/models');
+    return response;
+  }
+
+  /**
+   * @description: 创建渠道
+   * @author: guj
+   */
+  @UseGuards(AuthGuard('jwt'))
+  @Post()
+  @ApiOkResponse({ type: ResponseChannelDto })
+  @ApiOperation({ summary: '创建渠道' })
+  async createChannel(
+    @Body() channelInfo: SaveChannelDto,
+  ) {
+    const response = await this.httpService.post('/api/channel',channelInfo);
+    return response;
+  }
 
   /**
    * @description: 更新角色数据
@@ -133,7 +170,7 @@ export class ChannelController {
   }
 
   /**
-   * @description: 更新角色状态
+   * @description: 更新渠道状态
    * @author: 白雾茫茫丶
    */
   @UseGuards(AuthGuard('jwt'))
