@@ -52,7 +52,7 @@ export const createChannel = (
  * @Author: guj
  */
 export const updateChannel = ({ id, ...options }: API.CHANNEL) =>
-  httpRequest.put<number[]>(`${baseURL}/${id}`, options);
+  httpRequest.put<number[]>(`${baseURL}`, { id, ...options });
 
 /**
  * @description: 删除渠道

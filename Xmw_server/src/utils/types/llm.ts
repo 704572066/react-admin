@@ -40,7 +40,7 @@ export type ChannelsAttributes = {
   priority: number;
   proxy: string;
   test_model: string;
-  only_chat: number;
+  only_chat: boolean;
   plugin: string;
   // login_last_ip?: string; // 最后一次登录ip
   // login_last_time?: Date; // 最后一次登录时间

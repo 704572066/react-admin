@@ -35,6 +35,7 @@ import type { SessionTypes } from '@/utils/types';
 import { ChannelsService } from './channels.service'; // RoleManagement Service
 import {
   // CreateRoleManagementDto,
+  EditChannelDto,
   ListChannelsDto,
   ResponseChannelDto,
   SaveChannelDto,
@@ -138,23 +139,19 @@ export class ChannelController {
   }
 
   /**
-   * @description: 更新角色数据
-   * @author: 白雾茫茫丶
+   * @description: 更新渠道
+   * @author: guj
    */
-  // @UseGuards(AuthGuard('jwt'))
-  // @Put('/:role_id')
-  // @ApiOkResponse({ type: UpdateResponseDto })
-  // @ApiOperation({ summary: '更新角色数据' })
-  // async updateRole(
-  //   @Param('role_id') role_id: string,
-  //   @Body() roleInfo: SaveRoleManagementDto,
-  // ) {
-  //   const response = await this.roleManagementService.updateRole(
-  //     role_id,
-  //     roleInfo,
-  //   );
-  //   return response;
-  // }
+  @UseGuards(AuthGuard('jwt'))
+  @Put()
+  @ApiOkResponse({ type: UpdateResponseDto })
+  @ApiOperation({ summary: '更新角色数据' })
+  async updateChannel(
+    @Body() channelInfo: EditChannelDto,
+  ) {
+    const response = await this.httpService.put('/api/channel',channelInfo);
+    return response;
+  }
 
   /**
    * @description: 删除渠道

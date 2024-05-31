@@ -12,12 +12,14 @@ import {
   ResponseChannelDto,
 } from './response.channels.dto'; // 查询角色管理列表参数 Dto
 import {
+  EditChannelDto,
   SaveChannelDto,
   UpdateChannelStatusDto,
 } from './save.channels.dto'; // 保存角色数据 Dto
 
 export {
   ListChannelsDto,
+  EditChannelDto,
   ResponseChannelDto,
   SaveChannelDto,
   UpdateChannelStatusDto,

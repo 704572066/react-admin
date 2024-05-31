@@ -86,8 +86,8 @@ export class Channels
   @Column({ type: DataType.STRING(50), allowNull: true, comment: '排序' })
   test_model: string;
 
-  @Column({ type: DataType.SMALLINT, allowNull: true, comment: '排序' })
-  only_chat: number;
+  @Column({ type: DataType.BOOLEAN, allowNull: true, comment: '排序' })
+  only_chat: boolean;
 
   @Column({ type: DataType.JSON, allowNull: true, comment: '排序' })
   plugin: string;

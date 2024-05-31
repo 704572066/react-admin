@@ -159,6 +159,64 @@ export class SaveChannelDto {
   plugin: string;
 }
 
+export class EditChannelDto extends SaveChannelDto {
+
+  @ApiProperty({
+  type: Number,
+  description: 'id',
+  })
+  id: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '状态',
+    default: 1,
+  })
+  status: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '创建时间',
+  })
+  created_time: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '测试时间',
+  })
+  test_time: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '响应时间',
+  })
+  response_time: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'balance',
+  })
+  balance: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'balance_updated_time',
+  })
+  balance_updated_time: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'used_quota',
+  })
+  used_quota: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'priority',
+  })
+  priority: number;
+
+}
 /**
  * @description: 更新角色状态 Dto
  * @author: 白雾茫茫丶

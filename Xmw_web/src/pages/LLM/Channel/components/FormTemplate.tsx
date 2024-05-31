@@ -65,9 +65,9 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
     // const data = childForm.getFieldsValue()
     // console.log(data)
 
-		alert(formikValues.models);
+		// alert(formikValues.models);
 		// 提交数据
-		await (id ? updateChannel : createChannel)({ ...formikValues, id }).then(({ code, msg }) => {
+		await (id ? updateChannel : createChannel)({ ...formikValues, models: formikValues.modelsStr,id }).then(({ code, msg }) => {
 			if (isSuccess(code)) {
 				message.success(msg);
 				// 刷新表格

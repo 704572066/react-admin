@@ -86,6 +86,7 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
   const [inputLabel, setInputLabel] = useState(defaultConfig.inputLabel); //
   const [inputPrompt, setInputPrompt] = useState(defaultConfig.prompt);
   const [modelOptions, setModelOptions] = useState([]);
+  // const [setGroupOptions] = useState(groupOptions);
   const [batchAdd, setBatchAdd] = useState(false);
   const [providerModelsLoad, setProviderModelsLoad] = useState(false);
 
@@ -112,11 +113,13 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
           values.other = 'v2.1';
         }
         // let res = null;
+        // alert(values.only_chat)
         const modelStr = values.models.map((model) => model.id).join(',');
-        values.models = modelStr;
+
         values.group = values.groups.join(',');
-        alert(values.models)
-        return values; // 验证通过
+        const finalValues = {...values, model:modelStr};// 不覆盖原先的models，否则会报错重新打开编辑页面会报错
+        
+        return finalValues; // 验证通过
       } catch(error){
         formikRef.current.setTouched({
           type: true,
@@ -369,7 +372,7 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
   useEffect(() => {
     setBatchAdd(false);
     if (channelId) {
-      // alert(channelId);
+      
       loadChannel().then();
     } else {
       initChannel(1);

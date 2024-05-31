@@ -263,6 +263,7 @@ const TableTemplate: FC = () => {
 			dataIndex: 'id',
 			// valueType: 'indexBorder',
 			hideInTable: true,
+			hideInSearch: true,
 			width: 38,
 			align: 'center',
 		},
@@ -317,6 +318,7 @@ const TableTemplate: FC = () => {
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'response_time') }),
 			dataIndex: 'response_time',
 			tooltip:'点击测速',
+			hideInSearch: true,
 			ellipsis: true,
 			width: 65,
 			align: 'center',
@@ -329,6 +331,7 @@ const TableTemplate: FC = () => {
 		{
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'balance') }),
 			dataIndex: 'balance',
+			hideInSearch: true,
 			ellipsis: true,
 			width: 60,
 			align: 'center',
@@ -338,6 +341,7 @@ const TableTemplate: FC = () => {
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'used_quota') }),
 			dataIndex: 'used_quota',
 			ellipsis: true,
+			hideInSearch: true,
 			width: 60,
 			align: 'center',
 			render: (_, record) => renderQuota(record.used_quota),
@@ -346,7 +350,7 @@ const TableTemplate: FC = () => {
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'priority') }),
 			dataIndex: 'priority',
 			ellipsis: true,
-			
+			hideInSearch: true,
 			width: 65,
 			align: 'center',
 			valueType: 'digit',
@@ -367,6 +371,7 @@ const TableTemplate: FC = () => {
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'weight') }),
 			dataIndex: 'weight',
 			ellipsis: true,
+			hideInSearch: true,
 			width: 60,
 			align: 'center',
 			valueType: 'digit',
@@ -385,7 +390,7 @@ const TableTemplate: FC = () => {
 		/* 创建时间 */
 		// createTimeColumn,
 		/* 创建时间-搜索 */
-		createTimeInSearch,
+		// createTimeInSearch,
 		/* 描述 */
 		// describeColumn,
 		{

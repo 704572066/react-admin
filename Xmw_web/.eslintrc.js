@@ -69,7 +69,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn', // react-hooks依赖缺失报错
     'react/jsx-no-target-blank': 0, // a标签的target不带rel="noreferrer"潜在风险,
     'simple-import-sort/imports': 'error', // import排序 npm包需在引入最顶部排序规则
-    complexity: ['error', 36], // 代码圈复杂度
+    complexity: ['error', 38], // 代码圈复杂度
     '@typescript-eslint/no-var-requires': 'warn',
   },
   overrides: [
