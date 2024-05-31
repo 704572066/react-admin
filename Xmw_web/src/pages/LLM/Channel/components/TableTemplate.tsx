@@ -263,7 +263,10 @@ const TableTemplate: FC = () => {
 			dataIndex: 'id',
 			// valueType: 'indexBorder',
 			hideInTable: true,
+<<<<<<< HEAD
 			hideInSearch: true,
+=======
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 			width: 38,
 			align: 'center',
 		},

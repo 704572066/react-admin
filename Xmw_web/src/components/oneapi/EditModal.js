@@ -28,16 +28,26 @@ import { useTheme } from '@mui/material/styles';
 import { App } from 'antd';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { useEffect, useState, forwardRef, useImperativeHandle, useRef } from 'react';
 import * as Yup from 'yup';
 
 import { getChannel, getModels } from '../../services/llm/channel'
+=======
+import { useEffect, useState } from 'react';
+import * as Yup from 'yup';
+
+import { getModels } from '../../services/llm/channel'
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 // import { API } from 'utils/api';
 import { trims } from '../../utils/oneapi/common';
 import { CHANNEL_OPTIONS } from '../../utils/oneapi/constants/channel';
 import { defaultConfig, typeConfig } from '../../utils/types/llm/Config'; // typeConfig
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 const pluginList = require('../../utils/types/llm/Plugin.json');
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -74,11 +84,15 @@ const validationSchema = Yup.object().shape({
   }),
 });
 
+<<<<<<< HEAD
 // export type productProps = {
 //   infoData?: any
 // }
 
 const EditModal = ({ channelId, groupOptions }, ref) => {
+=======
+const EditModal = ({ channelId, groupOptions }) => {
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
   const { message } = App.useApp();
   const theme = useTheme();
   // const [loading, setLoading] = useState(false);
@@ -86,6 +100,7 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
   const [inputLabel, setInputLabel] = useState(defaultConfig.inputLabel); //
   const [inputPrompt, setInputPrompt] = useState(defaultConfig.prompt);
   const [modelOptions, setModelOptions] = useState([]);
+<<<<<<< HEAD
   // const [setGroupOptions] = useState(groupOptions);
   const [batchAdd, setBatchAdd] = useState(false);
   const [providerModelsLoad, setProviderModelsLoad] = useState(false);
@@ -147,6 +162,11 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
   // }));
 
 
+=======
+  const [batchAdd, setBatchAdd] = useState(false);
+  const [providerModelsLoad, setProviderModelsLoad] = useState(false);
+
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
   const initChannel = (typeValue) => {
     if (typeConfig[typeValue]?.inputLabel) {
       setInputLabel({ ...defaultConfig.inputLabel, ...typeConfig[typeValue].inputLabel });
@@ -333,9 +353,15 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
 
   const loadChannel = async () => {
     try {
+<<<<<<< HEAD
       const res = await getChannel(channelId);
       const { code, msg, data } = res;
       if (code === 200) {
+=======
+      const res = await API.get(`/api/channel/${channelId}`);
+      const { success, message, data } = res.data;
+      if (success) {
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
         if (data.models === '') {
           data.models = [];
         } else {
@@ -358,7 +384,11 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
         initChannel(data.type);
         setInitialInput(data);
       } else {
+<<<<<<< HEAD
         message.error(msg);
+=======
+        message.error(message);
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
       }
     } catch (error) {
       return;
@@ -372,7 +402,10 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
   useEffect(() => {
     setBatchAdd(false);
     if (channelId) {
+<<<<<<< HEAD
       
+=======
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
       loadChannel().then();
     } else {
       initChannel(1);
@@ -388,7 +421,11 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
     //   </DialogTitle>
     //   <Divider />
     <DialogContent>
+<<<<<<< HEAD
       <Formik innerRef={formikRef} initialValues={initialInput} enableReinitialize validationSchema={validationSchema} onSubmit={submit}>
+=======
+      <Formik initialValues={initialInput} enableReinitialize validationSchema={validationSchema} onSubmit={submit}>
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values, setFieldValue }) => (
           <form noValidate onSubmit={handleSubmit}>
             <FormControl fullWidth error={Boolean(touched.type && errors.type)} sx={{ ...theme.typography.otherInput }}>
@@ -818,6 +855,7 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
   );
 };
 
+<<<<<<< HEAD
 // export default EditModal;
 export default forwardRef(EditModal)
 
@@ -826,5 +864,14 @@ EditModal.propTypes = {
   channelId: PropTypes.number,
   // onCancel: PropTypes.func,
   // onOk: PropTypes.func,
+=======
+export default EditModal;
+
+EditModal.propTypes = {
+  open: PropTypes.bool,
+  channelId: PropTypes.number,
+  onCancel: PropTypes.func,
+  onOk: PropTypes.func,
+>>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
   groupOptions: PropTypes.array,
 };
