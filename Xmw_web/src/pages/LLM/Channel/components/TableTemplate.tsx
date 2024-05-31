@@ -256,7 +256,7 @@ const TableTemplate: FC = () => {
 		{
 			dataIndex: 'index',
 			valueType: 'indexBorder',
-			width: 38,
+			width: 28,
 			align: 'center',
 		},
 		{
@@ -271,12 +271,12 @@ const TableTemplate: FC = () => {
 			title: formatMessage({ id: formatPerfix(ROUTES.CHANNEL, 'name') }),
 			dataIndex: 'name',
 			ellipsis: true,
-			width: 60,
+			align: 'center',
+			width: 80,
 			render: (text) => <Space>
-				<Tag
-					icon={<IconFont type="icon-role-management" className={PrimaryColor} />} >
+
 					{text}
-				</Tag>
+
 			</Space>,
 		},
 		{
@@ -284,7 +284,7 @@ const TableTemplate: FC = () => {
 			dataIndex: 'type',
 			ellipsis: true,
 			align: 'center',
-			width: 60,
+			width: 80,
 			render: (_, record) => <Space>
 			<Tag>
 				{CHANNEL_OPTIONS[record.type].text}
@@ -400,6 +400,9 @@ const TableTemplate: FC = () => {
 				<SimpleDropdownMenu
 					pathName={ROUTES.CHANNEL}
 					items={record.models}
+					id={record.id}
+					name={record.name}
+					testCallback={handleResponseTime}
 					// editCallback={() => {
 					// 	// form.setFieldsValue({
 					// 	// 	...record,

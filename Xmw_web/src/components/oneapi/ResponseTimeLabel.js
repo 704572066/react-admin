@@ -31,7 +31,7 @@ const ResponseTimeLabel = ({ test_time, response_time, handle_action }) => {
 
   return (
     <Tooltip title={title} placement="top" onClick={handle_action}>
-      <Tag color={color} bordered={false} > {response_time === 0 ? '未测试' : time} </Tag>
+      <Tag color={color} bordered={false} style={{ cursor: 'pointer'}}> {response_time === 0 ? '未测试' : time}</Tag>
     </Tooltip>
   );
 };

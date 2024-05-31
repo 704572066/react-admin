@@ -8,7 +8,7 @@
  */
 import { ClusterOutlined, DeleteOutlined, DownOutlined, EditOutlined } from '@ant-design/icons' // antd 图标库
 import { Access, useAccess, useIntl } from '@umijs/max'
-import { App, Button, Dropdown, MenuProps } from 'antd'
+import { App, Button, Dropdown, MenuProps, Tag } from 'antd'
 import { filter, get } from 'lodash-es'
 import { FC } from 'react'
 
@@ -25,8 +25,10 @@ import type { PathNames, Response } from '@/utils/types'
 export type DropdownMenuProps = {
   pathName: PathNames; // 路由字段
   items: string;
+  id: number;
+  name: string;
   // addChildCallback?: () => void; // 添加子级回调
-  // editCallback?: () => void; // 编辑回调
+  testCallback: (id:number, name:string, model:string) => void; // 测试回调
   // deleteParams: DeleteParams;
   reloadTable: () => void; // 刷新表格
 }
@@ -34,8 +36,10 @@ export type DropdownMenuProps = {
 const SimpleDropdownMenu: FC<DropdownMenuProps> = ({
   pathName,
   items,
+  id,
+  name,
   // addChildCallback,
-  // editCallback,
+  testCallback,
   // deleteParams,
   reloadTable,
 }) => {
@@ -54,11 +58,11 @@ const SimpleDropdownMenu: FC<DropdownMenuProps> = ({
   // 下拉菜单
   const menuItems: MenuProps['items'] = modelMap.map((model) => (
     {
-      key: '1',
+      key: model,
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        <span>
           {model}
-        </a>
+        </span>
       ),
     }
   ))
@@ -70,7 +74,7 @@ const SimpleDropdownMenu: FC<DropdownMenuProps> = ({
   const onClickMenuItem: MenuProps['onClick'] = ({ key }) => {
     // 删除参数
     // const { request, id } = deleteParams
-    alert('r')
+    testCallback(id, name, key);
     
   };
   return (
