@@ -116,7 +116,7 @@ const EditModal = ({ channelId, groupOptions }, ref) => {
         const modelStr = values.models.map((model) => model.id).join(',');
 
         values.group = values.groups.join(',');
-        const finalValues = {...values, model:modelStr};// 不覆盖原先的models，否则会报错重新打开编辑页面会报错
+        const finalValues = {...values, models:modelStr};// 不覆盖原先的models，否则会报错重新打开编辑页面会报错
         
         return finalValues; // 验证通过
       } catch(error){

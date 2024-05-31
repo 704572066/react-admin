@@ -67,7 +67,7 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 
 		// alert(formikValues.models);
 		// 提交数据
-		await (id ? updateChannel : createChannel)({ ...formikValues, models: formikValues.modelsStr,id }).then(({ code, msg }) => {
+		await (id ? updateChannel : createChannel)({ ...formikValues, models: formikValues.models,id }).then(({ code, msg }) => {
 			if (isSuccess(code)) {
 				message.success(msg);
 				// 刷新表格
