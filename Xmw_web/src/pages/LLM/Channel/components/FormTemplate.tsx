@@ -9,7 +9,6 @@
 
 import { ModalForm } from '@ant-design/pro-components';
 import { App, Form } from 'antd';
-<<<<<<< HEAD
 // import type { FC } from 'react';
 // import { useEffect,useState } from 'react';
 import { FC, useEffect, useState, useRef } from 'react'
@@ -17,14 +16,6 @@ import { useFormik } from 'formik'
 import EditModal from '@/components/oneapi/EditModal'
 import { renderFormTitle } from '@/components/TableColumns'
 import { createChannel, getGroup, updateChannel } from '@/services/llm/channel'
-=======
-import type { FC } from 'react';
-import { useEffect,useState } from 'react';
-
-import EditModal from '@/components/oneapi/EditModal'
-import { renderFormTitle } from '@/components/TableColumns'
-import { createChannel, updateChannel } from '@/services/llm/channel'
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 import { isSuccess } from '@/utils'
 import { ROUTES } from '@/utils/enums'
 import type { FormTemplateProps } from '@/utils/types/system/role-management'
@@ -49,7 +40,6 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 		form.resetFields();
 	}
 	const [groupOptions, setGroupOptions] = useState<string[]>([]);
-<<<<<<< HEAD
 	const fetchGroups = async () => {
     try {
       const res = await getGroup();
@@ -61,22 +51,10 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 	useEffect(() => {
     fetchGroups().then();
   }, []);
-=======
-	// const fetchGroups = async () => {
-  //   try {
-  //     // const res = await API.get(`/api/group/`);
-  //     setGroupOptions(['a','b']);
-  //   } catch (error) {
-  //     message.error('error.message');
-  //   }
-  // };
-
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 
 	const childRef = useRef<any>()
 	// 提交表单
 	const handlerSubmit = async (values: API.CHANNEL): Promise<void> => {
-<<<<<<< HEAD
 		// 获取子组件数据
     // const childForm = childRef.current.getForm()
 		const formikValues = await childRef.current.validateForm()
@@ -90,10 +68,6 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 		// alert(formikValues.models);
 		// 提交数据
 		await (id ? updateChannel : createChannel)({ ...formikValues, models: formikValues.modelsStr,id }).then(({ code, msg }) => {
-=======
-		// 提交数据
-		await (id ? updateChannel : createChannel)({ ...values, id }).then(({ code, msg }) => {
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 			if (isSuccess(code)) {
 				message.success(msg);
 				// 刷新表格
@@ -120,11 +94,7 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 			onFinish={handlerSubmit}
 		>
 			{/* <FormTemplateItem /> */}
-<<<<<<< HEAD
 			<EditModal channelId={id} groupOptions={groupOptions} ref={childRef}/>
-=======
-			<EditModal channelId={id} groupOptions={groupOptions}/>
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
 		</ModalForm>
 	);
 };

@@ -68,22 +68,14 @@
     "dayjs": "^1.11.10",
     "element-china-area-data": "^6.1.0",
     "events": "^3.3.0",
-<<<<<<< HEAD
     "formik": "^2.4.5",
-=======
-    "formik": "^2.4.6",
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
     "prop-types": "^15.8.1",
     "rc-menu": "^9.12.2",
     "react": "^18.2.0",
     "react-quill": "^2.0.0",
-<<<<<<< HEAD
     "yup": "^0.32.11",
-=======
-    "yup": "^1.4.0",
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

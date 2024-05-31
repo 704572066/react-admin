@@ -95,28 +95,9 @@ export class ChannelController {
       return response;
     }
 
-<<<<<<< HEAD
-    /**
+  /**
    * @description: 获取分组
    * @author: guj
-=======
-        /**
-   * @description: 获取模型列表
-   * @author: guj
-   */
-        @UseGuards(AuthGuard('jwt'))
-        @Get('/models')
-        @ApiOkResponse({ type: ResponseChannelDto })
-        @ApiOperation({ summary: '获取模型列表' })
-        async getModels() {
-          const response = await this.httpService.get('/api/channel/models');
-          return response;
-        }
-
-  /**
-   * @description: 创建角色数据
-   * @author: 白雾茫茫丶
->>>>>>> 91e1fa8919f5389fdff1d575925d93b73b05f2c4
    */
     @UseGuards(AuthGuard('jwt'))
     @Get('/group')
