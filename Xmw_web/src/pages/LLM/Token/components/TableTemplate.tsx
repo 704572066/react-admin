@@ -310,7 +310,7 @@ const TableTemplate: FC = () => {
 						// 新增按钮
 						<CreateButton
 							key="create"
-							pathName={ROUTES.CHANNEL}
+							pathName={ROUTES.TOKEN}
 							callback={() => setOpenDrawerTrue()} />,
 					]}
 					scroll={{ x: columnScrollX(columns) }}
