@@ -66,5 +66,13 @@ export default {
       delete: 'llm:channel:delete', // 删除
     },
   },
+  token: {
+    // 渠道管理
+    'token': {
+      add: 'llm:token:add', // 新建
+      edit: 'llm:token:edit', // 编辑
+      delete: 'llm:token:delete', // 删除
+    },
+  },
 
 }

@@ -24,6 +24,13 @@ export default {
       access: 'adminRouteFilter',
       exact: true,
     },
+    {
+      path: '/llm/token',
+      name: 'token',
+      component: './LLM/Token',
+      access: 'adminRouteFilter',
+      exact: true,
+    },
     // {
     //   path: '/ai-console/gpt-app-management',
     //   name: 'gpt-app-management',

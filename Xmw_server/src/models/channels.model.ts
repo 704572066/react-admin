@@ -9,7 +9,6 @@
 import {
   Column,
   DataType,
-  HasMany,
   Model,
   PrimaryKey,
   Table,

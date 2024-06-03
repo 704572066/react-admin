@@ -228,6 +228,23 @@ declare global {
       success: boolean;
       time: number;
     }
+
+    type TOKEN = {
+      id: number; // id
+      type: number; // 名称
+      key: string; // 用户工号
+      status: number; // 密码(加密)
+      name: string; // 中文名
+      created_time: number; // 年龄
+      accessed_time: number; // 电子邮箱
+      expired_time: number; // 电话号码
+      used_quota: number; // 详细地址
+      unlimited_quota: number; // 详细地址
+      remain_quota: number; // 详细地址
+      chat_cache: number;
+
+    }
+
   
   }
 

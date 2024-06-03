@@ -7,18 +7,18 @@
  * @LastEditTime: 2022-11-09 14:10:09
  */
 import { ApiProperty } from '@nestjs/swagger';
-// import { json } from 'sequelize';
-// import { json } from 'sequelize';
-import { JSON } from 'sequelize';
 
-import type { ChannelStatus } from '@/utils/types/llm';
+// import { json } from 'sequelize';
+// import { json } from 'sequelize';
+// import { JSON } from 'sequelize';
+import type { TokenStatus } from '@/utils/types/llm';
 // import { json } from 'sequelize';
 
 /**
  * @description: 保存角色数据 Dto
  * @author: 白雾茫茫丶
  */
-export class SaveChannelDto {
+export class SaveTokenDto {
   // @ApiProperty({
   //   type: Number,
   //   description: 'id',
@@ -159,7 +159,7 @@ export class SaveChannelDto {
   plugin: string;
 }
 
-export class EditChannelDto extends SaveChannelDto {
+export class EditTokenDto extends SaveTokenDto {
 
   @ApiProperty({
   type: Number,
@@ -221,11 +221,11 @@ export class EditChannelDto extends SaveChannelDto {
  * @description: 更新角色状态 Dto
  * @author: 白雾茫茫丶
  */
-export class UpdateChannelStatusDto {
+export class UpdateTokenStatusDto {
   @ApiProperty({
     type: Number,
     description: '角色状态',
     default: 1,
   })
-  status: ChannelStatus;
+  status: TokenStatus;
 }

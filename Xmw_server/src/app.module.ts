@@ -29,6 +29,7 @@ import { UserManagementModule } from '@/modules/system/user-management/user-mana
 import App_globalConfig from './config/configuration'; // 全局配置
 import DatabaseConfig from './config/database'; // 数据库配置
 import RedisConfig from './config/redis'; // redis配置
+import { TokenModule } from './modules/llm/token/token.module';
 import { PrismaModule } from './npx/prisma/prisma.module';
 
 @Module({
@@ -63,6 +64,7 @@ import { PrismaModule } from './npx/prisma/prisma.module';
     GPTDataSetManagementModule,
     PrismaModule,
     ChannelsModule,
+    TokenModule,
   ],
 })
 export class AppModule {}

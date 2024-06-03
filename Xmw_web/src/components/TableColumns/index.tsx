@@ -16,7 +16,7 @@ import { FC } from 'react'
 
 import { formatPathName, formatPerfix, getLocalStorageItem, randomTagColor } from '@/utils'
 import { FLAG_OPTS } from '@/utils/const'
-import { CHANNEL_STATUS, GPTUSERSTATUS, INTERNATION, LOCAL_STORAGE, OPERATION, ROUTES, STATUS } from '@/utils/enums'
+import { CHANNEL_STATUS, GPTUSERSTATUS, INTERNATION, LOCAL_STORAGE, OPERATION, ROUTES, STATUS, TOKEN_STATUS } from '@/utils/enums'
 import permissions from '@/utils/permission'
 import type { PathNames } from '@/utils/types'
 
@@ -64,6 +64,7 @@ export const channelStatusColumn: ProColumns = {
   title: <FormattedMessage id={INTERNATION.STATUS} />,
   dataIndex: 'status',
   width: 60,
+  hideInSearch: true,
   filters: true,
   onFilter: true,
   align: 'center',
@@ -72,6 +73,25 @@ export const channelStatusColumn: ProColumns = {
     [CHANNEL_STATUS.ENABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
   },
 }
+
+/**
+ * @description: channel状态
+ * @author: guj 
+ */
+export const tokenStatusColumn: ProColumns = {
+  title: <FormattedMessage id={INTERNATION.STATUS} />,
+  dataIndex: 'status',
+  width: 60,
+  hideInSearch: true,
+  filters: true,
+  onFilter: true,
+  align: 'center',
+  valueEnum: {
+    [TOKEN_STATUS.MANUAL]: { text: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />, status: 'Default' },
+    [TOKEN_STATUS.ENABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
+  },
+}
+
 
 /**
  * @description: 排序

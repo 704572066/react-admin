@@ -64,6 +64,7 @@ export enum ROUTES {
   GPTAPPMANAGEMENT = '/ai-console/gpt-app-management', // gpt-应用管理
   GPTDATASETMANAGEMENT = '/ai-console/gpt-dataset-management', // gpt-应用管理
   CHANNEL = '/llm/channel',
+  TOKEN = '/llm/token',
 }
 
 /**
@@ -133,6 +134,15 @@ export enum STATUS {
  * @author: 白雾茫茫丶
  */
 export enum CHANNEL_STATUS {
+  ENABLE = 1, // 启用
+  MANUAL = 2, // 手动
+}
+
+/**
+ * @description: 渠道状态
+ * @author: 白雾茫茫丶
+ */
+export enum TOKEN_STATUS {
   ENABLE = 1, // 启用
   MANUAL = 2, // 手动
 }

@@ -19,7 +19,7 @@ module.exports = {
     eqeqeq: 2, // 使用全等
     'no-unused-vars': 0, // 禁止出现未使用过的变量
     'consistent-return': 2, // 要求使用一致的 return 语句
-    'max-len': ['error', { code: 140 }], // 强制行的最大长度
+    'max-len': ['error', { code: 150 }], // 强制行的最大长度
     'array-callback-return': 2, // 强制数组方法的回调函数中有 return 语句
     'comma-dangle': [
       'error',

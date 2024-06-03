@@ -10,7 +10,7 @@ import type {
   EnumValues
 } from '@/utils/types';
 
-import { CHANNEL_STATUS } from '../enums';
+import { CHANNEL_STATUS, TOKEN_STATUS } from '../enums';
 
 // import { JobsAttributes, OrgAttributes } from './administrative';
 
@@ -60,3 +60,30 @@ export type AbilitiesAttributes = {
  * @author: 白雾茫茫丶
  */
 export type ChannelStatus = EnumValues<typeof CHANNEL_STATUS>;
+
+/**
+ * @description: 状态
+ * @author: 白雾茫茫丶
+ */
+export type TokenStatus = EnumValues<typeof TOKEN_STATUS>;
+
+
+
+/**
+ * @description: xmw_users Attributes
+ * @author: 白雾茫茫丶
+ */
+export type TokenAttributes = {
+  id: number; // id
+  user_id: number; // 名称
+  key: string; // 用户工号
+  name: string; // 用户工号
+  status: number; // 密码(加密)
+  created_time: number; // 年龄
+  accessed_time: number; // 电子邮箱
+  expired_time: number; // 电话号码
+  used_quota: number; // 详细地址
+  unlimited_quota: number;
+  remain_quota: number;
+  chat_cache: number;
+} 
