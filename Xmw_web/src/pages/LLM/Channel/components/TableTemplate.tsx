@@ -13,13 +13,14 @@ import { useIntl } from '@umijs/max'
 import { useBoolean, useRequest } from 'ahooks';
 import { Alert, App, Form, InputNumber, message, Popconfirm, Space, Switch, Tag, Tooltip } from 'antd'
 import { values } from 'lodash';
-import { map } from 'lodash-es'
-import { FC, useRef, useState } from 'react';
+import { map, mapValues } from 'lodash-es'
+import { FC, useEffect, useRef, useState } from 'react';
 
 import DropdownMenu from '@/components/DropdownMenu' // 表格操作下拉菜单
 import ResponseTimeLabel from '@/components/oneapi/ResponseTimeLabel';
 import SimpleDropdownMenu from '@/components/SimpleDropdownMenu' // 表格操作下拉菜单
 import {
+	channelStatusColumn,
 	columnScrollX,
 	CreateButton,
 	createTimeColumn,
@@ -27,9 +28,8 @@ import {
 	describeColumn,
 	operationColumn,
 	sortColumn,
-	statusColumn,
 } from '@/components/TableColumns'
-import { delChannel, getChannelList, setChannelPriority, 
+import { delChannel, getChannelList, getGroup, setChannelPriority, 
 	setChannelStatus, setChannelWeight, testChannel } from '@/services/llm/channel' // 渠道管理接口
 import { formatPerfix, formatResponse } from '@/utils'
 import { IconFont } from '@/utils/const'
@@ -64,6 +64,19 @@ const TableTemplate: FC = () => {
 	function reloadTable() {
 		tableRef?.current?.reload()
 	}
+
+	const [groupOptions, setGroupOptions] = useState<string[]>([]);
+	const fetchGroups = async () => {
+    try {
+      const res = await getGroup();
+      setGroupOptions(res.data.data);
+    } catch (error) {
+      message.error((error as any).message);
+    }
+  };
+	useEffect(() => {
+    fetchGroups().then();
+  }, []);
 
 	// const manageChannel = async (id:number, action:string, value:string) => {
   //   const url = 'http://localhost:3002/api/channel/';
@@ -137,8 +150,8 @@ const TableTemplate: FC = () => {
 	
 
 	/**
-	 * @description: 获取角色管理列表
-	 * @author: 白雾茫茫丶
+	 * @description: 获取渠道列表
+	 * @author: guj
 	 */
 	const { runAsync: fetchChannelList } = useRequest(
 		async (params) => formatResponse(await getChannelList(params)), {
@@ -285,6 +298,7 @@ const TableTemplate: FC = () => {
 			ellipsis: true,
 			align: 'center',
 			width: 80,
+			valueEnum: mapValues(CHANNEL_OPTIONS, (e) => e.text),
 			render: (_, record) => <Space>
 			<Tag>
 				{CHANNEL_OPTIONS[record.type].text}
@@ -297,6 +311,10 @@ const TableTemplate: FC = () => {
 			ellipsis: true,
 			width: 60,
 			align: 'center',
+			valueEnum: groupOptions.reduce((groupOptions, key) => {
+				groupOptions[key] = key; // 或者使用其他默认值，比如 null 或 0
+				return groupOptions;
+			}, {} as Record<string, string>),
 			render: (text) => <Space>
 				<Tag>
 					{text}
@@ -311,7 +329,7 @@ const TableTemplate: FC = () => {
 		// },
 		/* 状态 */
 		{
-			...statusColumn,
+			...channelStatusColumn,
 			render: (_, record) => renderChannelStatus(record),
 		},
 		{

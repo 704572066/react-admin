@@ -63,21 +63,21 @@ export class ChannelsService {
   ): Promise<Response<PageResponse<Channels>>> {
     // 解构参数
     const {
-      role_name,
-      role_code,
+      name,
+      type,
       status,
-      start_time,
-      end_time,
+      group,
       pageSize,
       current,
     } = channelInfo;
     // 拼接查询参数
     const where: WhereOptions = {};
-    if (role_name) where.role_name = { [Op.substring]: role_name };
-    if (role_code) where.role_code = { [Op.substring]: role_code };
+    if (name) where.name = { [Op.substring]: name };
+    if (type) where.type = { [Op.eq]: type };
     if (status) where.status = { [Op.eq]: status };
-    if (start_time && end_time)
-      where.created_time = { [Op.between]: [start_time, end_time] };
+    if (group) where.group = { [Op.eq]: group };
+    // if (start_time && end_time)
+    //   where.created_time = { [Op.between]: [start_time, end_time] };
     // where.menu_check = { [Op.eq]: 0 };
     // 分页查询数据
     const count = await this.channelModel.count();

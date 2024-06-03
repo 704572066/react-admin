@@ -69,7 +69,7 @@ const SimpleDropdownMenu: FC<DropdownMenuProps> = ({
 
   /**
    * @description: 点击菜单回调
-   * @author: 白雾茫茫丶
+   * @author: guj
    */
   const onClickMenuItem: MenuProps['onClick'] = ({ key }) => {
     // 删除参数

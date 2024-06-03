@@ -8,32 +8,40 @@
  */
 import { ApiProperty } from '@nestjs/swagger';
 
-import type { Status } from '@/utils/types';
+import type { ChannelStatus } from '@/utils/types';
 
 export class ListChannelsDto {
   @ApiProperty({
     type: String,
-    description: '角色名称',
-    default: '超级管理员',
+    description: '名称',
+    default: '',
     required: false,
   })
-  role_name?: string;
+  name?: string;
 
   @ApiProperty({
     type: String,
-    description: '角色编码',
-    default: 'Super Admin',
+    description: '分组',
+    default: '',
     required: false,
   })
-  role_code?: string;
+  group?: string;
 
   @ApiProperty({
     type: Number,
-    description: '角色状态',
+    description: '类型',
+    default: '',
+    required: false,
+  })
+  type?: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '状态',
     default: 1,
     required: false,
   })
-  status?: Status;
+  status?: ChannelStatus;
 
   @ApiProperty({
     type: Number,
@@ -49,19 +57,19 @@ export class ListChannelsDto {
   })
   current: number;
 
-  @ApiProperty({
-    type: Date,
-    description: '开始日期',
-    default: '2022-10-01 00:00:00',
-    required: false,
-  })
-  start_time?: Date;
+  // @ApiProperty({
+  //   type: Date,
+  //   description: '开始日期',
+  //   default: '2022-10-01 00:00:00',
+  //   required: false,
+  // })
+  // start_time?: Date;
 
-  @ApiProperty({
-    type: Date,
-    description: '结束日期',
-    default: '2022-10-02 23:59:59',
-    required: false,
-  })
-  end_time?: Date;
+  // @ApiProperty({
+  //   type: Date,
+  //   description: '结束日期',
+  //   default: '2022-10-02 23:59:59',
+  //   required: false,
+  // })
+  // end_time?: Date;
 }

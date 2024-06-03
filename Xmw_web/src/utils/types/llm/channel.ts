@@ -14,7 +14,7 @@ export type FormTemplateProps = {
  * @author: 白雾茫茫丶
  */
 export type SearchParams = PaginationParams &
-  SearchTimes & Partial<Pick<API.ROLEMANAGEMENT, 'role_name' | 'role_code' | 'status'>>
+  SearchTimes & Partial<Pick<API.CHANNEL, 'name' | 'type' | 'status'| 'group'>>
 
 /**
  * @description: 设置角色状态 Params

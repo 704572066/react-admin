@@ -16,7 +16,7 @@ import { FC } from 'react'
 
 import { formatPathName, formatPerfix, getLocalStorageItem, randomTagColor } from '@/utils'
 import { FLAG_OPTS } from '@/utils/const'
-import { GPTUSERSTATUS, INTERNATION, LOCAL_STORAGE, OPERATION, ROUTES, STATUS } from '@/utils/enums'
+import { CHANNEL_STATUS, GPTUSERSTATUS, INTERNATION, LOCAL_STORAGE, OPERATION, ROUTES, STATUS } from '@/utils/enums'
 import permissions from '@/utils/permission'
 import type { PathNames } from '@/utils/types'
 
@@ -34,8 +34,42 @@ export const statusColumn: ProColumns = {
   onFilter: true,
   align: 'center',
   valueEnum: {
+    [STATUS.DISABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />, status: 'Default' },
+    [STATUS.NORMAL]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
+  },
+}
+
+/**
+ * @description: GPT状态
+ * @author: guj
+ */
+export const gptUserStatusColumn: ProColumns = {
+  title: <FormattedMessage id={INTERNATION.STATUS} />,
+  dataIndex: 'status',
+  width: 60,
+  filters: true,
+  onFilter: true,
+  align: 'center',
+  valueEnum: {
     [GPTUSERSTATUS.DISABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />, status: 'Default' },
     [GPTUSERSTATUS.NORMAL]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
+  },
+}
+
+/**
+ * @description: channel状态
+ * @author: guj 
+ */
+export const channelStatusColumn: ProColumns = {
+  title: <FormattedMessage id={INTERNATION.STATUS} />,
+  dataIndex: 'status',
+  width: 60,
+  filters: true,
+  onFilter: true,
+  align: 'center',
+  valueEnum: {
+    [CHANNEL_STATUS.MANUAL]: { text: <FormattedMessage id={INTERNATION.STATUS_DISABLE} />, status: 'Default' },
+    [CHANNEL_STATUS.ENABLE]: { text: <FormattedMessage id={INTERNATION.STATUS_NORMAL} />, status: 'Processing' },
   },
 }
 

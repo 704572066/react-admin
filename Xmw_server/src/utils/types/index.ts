@@ -8,6 +8,7 @@
  */
 import {
   ANNOUNCEMENT_TYPE,
+  CHANNEL_STATUS,
   FLAG,
   GPT_USER_STATUS,
   LANGS,
@@ -89,6 +90,12 @@ export type SessionTypes = {
  * @author: 白雾茫茫丶
  */
 export type Status = EnumValues<typeof STATUS>;
+
+/**
+ * @description: 状态
+ * @author: 白雾茫茫丶
+ */
+export type ChannelStatus = EnumValues<typeof CHANNEL_STATUS>;
 
 /**
  * @description: 是否
