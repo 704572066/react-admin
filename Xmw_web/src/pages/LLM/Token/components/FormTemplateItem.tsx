@@ -6,19 +6,35 @@
  * @LastEditors: 白雾茫茫丶
  * @LastEditTime: 2023-09-22 14:43:45
  */
-import { ProFormText, ProFormTreeSelect } from '@ant-design/pro-components';
+import { ProFormDatePicker, ProFormDateTimePicker,ProFormDigit, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max'
 import { useRequest } from 'ahooks'
-import { TreeSelect } from 'antd'
+import { Alert, DatePicker, Switch, TreeSelect } from 'antd'
 import { get } from 'lodash-es'
 import type { FC } from 'react';
-
+import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { ProFormDescribe, ProFormSort, ProFormStatus } from '@/components/CommonProForm'
 import { getMenuList } from '@/services/system/menu-management'
 import { formatPerfix } from '@/utils'
 import { INTERNATION, ROUTES } from '@/utils/enums'
 
-const FormTemplateItem: FC = () => {
+const FormTemplateItem: FC<{ values: any }> = ({values}) => {
+	// values.expired_time = -100
+	// const b:boolean = (values.expired_time >= 0) ? true : false
+	// alert('b '+b)
+	const [isVisible, setIsVisible] = useState<boolean>(values.expired_time >= 0);
+	// alert(isVisible)
+
+	const [isDisabled, setIsDisabled] = useState<boolean>(values.unlimited_quota);
+
+	useEffect(() => {
+    setIsVisible(values.expired_time >= 0);
+  }, [values.expired_time >= 0]);
+
+	useEffect(() => {
+    setIsDisabled(values.unlimited_quota);
+  }, [values.unlimited_quota]);
 	const { formatMessage } = useIntl();
 	/**
 	 * @description: 获取当前菜单数据
@@ -31,11 +47,11 @@ const FormTemplateItem: FC = () => {
 		<>
 			{/* 角色名称 */}
 			<ProFormText
-				name="role_name"
+				name="name"
 				colProps={{ span: 24 }}
-				label={formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'role_name') })}
+				label={formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'name') })}
 				placeholder={formatMessage({ id: INTERNATION.PLACEHOLDER }) +
-					formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'role_name') })}
+					formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'name') })}
 				fieldProps={{
 					showCount: true,
 					maxLength: 32,
@@ -46,59 +62,39 @@ const FormTemplateItem: FC = () => {
 						validator: (_, value) => {
 							if (!value) {
 								return Promise.reject(new Error(formatMessage({ id: INTERNATION.PLACEHOLDER }) +
-									formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'role_name') })))
+									formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'name') })))
 							} else if (value.length < 2) {
 								return Promise.reject(new Error(
-									formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'role_name.validator') })))
+									formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'name.validator') })))
 							}
 							return Promise.resolve()
 						},
 					},
 				]}
 			/>
-			{/* 角色编码 */}
-			<ProFormText
-				name="role_code"
-				colProps={{ span: 24 }}
-				label={formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'role_code') })}
-				placeholder={formatMessage({ id: INTERNATION.PLACEHOLDER }) +
-					formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'role_code') })}
-				fieldProps={{
-					showCount: true,
-					maxLength: 32,
-				}}
-				rules={[{ required: true }]}
-			/>
-			{/* 菜单权限 */}
-			<ProFormTreeSelect
-				name="menu_permission"
-				label={formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'menu_permission') })}
-				colProps={{ span: 24 }}
-				fieldProps={{
-					treeData: menuData,
-					allowClear: true,
-					fieldNames: {
-						label: 'zh-CN',
-						value: 'menu_id',
-					},
-					maxTagCount: 10,
-					treeCheckable: true,
-					showCheckedStrategy: TreeSelect.SHOW_ALL,
-					placeholder: formatMessage({ id: INTERNATION.PLACEHOLDER_SELETED }) +
-						formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'menu_permission') }),
-				}}
-				rules={[{
-					required: true,
-					message: formatMessage({ id: INTERNATION.PLACEHOLDER_SELETED }) +
-						formatMessage({ id: formatPerfix(ROUTES.ROLEMANAGEMENT, 'menu_permission') }),
-				}]}
-			/>
-			{/* 排序 */}
-			<ProFormSort />
-			{/* 状态 */}
-			<ProFormStatus />
-			{/* 描述 */}
-			<ProFormDescribe />
+			{isVisible && <ProFormDateTimePicker fieldProps={{
+          format: 'YYYY-MM-DD HH:mm:ss', // DatePicker 中显示的格式
+        }} convertValue={(value) => {
+          // 将 Unix 时间戳转换为 moment 对象以便显示在 DatePicker 中
+          // alert(dayjs.unix(value));
+					if(typeof value === 'number')
+						return dayjs.unix(value);
+					return value;
+        }} name='expired_time' label="过期时间" width={'md'} />
+			}
+			<ProFormSwitch fieldProps={{ checked:!isVisible,onChange: (value) => setIsVisible(!value)}} addonAfter="永不过期"/>
+			<ProFormDigit
+						disabled={isDisabled}
+            label="额度"
+            name="remain_quota"
+						width={'md'}
+            min={0}
+						fieldProps={{addonAfter:'（等价金额：$-0.00）'}}
+          />
+			<ProFormSwitch name="unlimited_quota" fieldProps={{
+				onChange: (value) => setIsDisabled(value)}} addonAfter="无限额度"/>
+
+			
 		</>
 	)
 }

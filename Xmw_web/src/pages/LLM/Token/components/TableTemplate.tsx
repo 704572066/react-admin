@@ -197,7 +197,7 @@ const TableTemplate: FC = () => {
 			ellipsis: true,
 			width: 60,
 			align: 'center',
-			render: (_, record) => record.used_quota,
+			render: (_, record) => renderQuota(record.used_quota),
 		},
 		{
 			title: formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'remain_quota') }),
@@ -250,7 +250,16 @@ const TableTemplate: FC = () => {
 		/* 排序 */
 		// sortColumn,
 		/* 创建时间 */
-		createTimeColumn,
+		{
+			title: formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'created_time') }),
+			dataIndex: 'created_time',
+			// valueType: 'dateTime',
+			hideInSearch: true,
+			sorter: true,
+			align: 'center',
+			width: 160,
+			render: (_, record) => timestamp2string(record.created_time),
+		},
 		{
 			title: formatMessage({ id: formatPerfix(ROUTES.TOKEN, 'expired_time') }),
 			dataIndex: 'expired_time',

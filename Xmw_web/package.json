@@ -70,6 +70,7 @@
     "events": "^3.3.0",
     "formik": "^2.4.5",
     "lodash-es": "^4.17.21",
+    "moment": "^2.24.0",
     "nprogress": "^0.2.0",
     "prop-types": "^15.8.1",
     "rc-menu": "^9.12.2",
