@@ -52,7 +52,7 @@ export class Token
   @Column({ type: DataType.DOUBLE, allowNull: true, comment: '排序' })
   remain_quota: number;
 
-  @Column({ type: DataType.BIGINT, allowNull: true, comment: '排序' })
+  @Column({ type: DataType.SMALLINT, allowNull: true, comment: '排序' })
   unlimited_quota: number;
 
   @Column({ type: DataType.BIGINT, allowNull: true, comment: '排序' })

@@ -26,17 +26,59 @@ export class SaveTokenDto {
   // id: number;
 
   @ApiProperty({
-    type: Number,
-    description: '渠道类型',
+    type: String,
+    description: 'name',
   })
-  type: number;
+  type: string;
 
-  // @ApiProperty({
-  //   type: Number,
-  //   description: '状态',
-  //   default: 1,
-  // })
-  // status: number;
+  @ApiProperty({
+    type: Number,
+    description: 'expired_time',
+    default: -1,
+  })
+  expired_time: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'remain_quota',
+  })
+  remain_quota: number;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'unlimited_quota',
+  })
+  unlimited_quota: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'is_edit',
+    default:false,
+  })
+  is_edit: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'chat_cache',
+    default:false,
+  })
+  chat_cache: boolean;
+}
+
+export class EditTokenDto extends SaveTokenDto {
+
+  @ApiProperty({
+  type: Number,
+  description: 'id',
+  })
+  id: number;
+
+  @ApiProperty({
+    type: Number,
+    description: '状态',
+    default: 1,
+  })
+  status: number;
 
   // @ApiProperty({
   //   type: Number,
@@ -56,18 +98,6 @@ export class SaveTokenDto {
   // })
   // response_time: number;
 
-  @ApiProperty({
-    type: String,
-    description: 'base_url',
-  })
-  base_url: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'other',
-  })
-  other: string;
-
   // @ApiProperty({
   //   type: Number,
   //   description: 'balance',
@@ -80,141 +110,17 @@ export class SaveTokenDto {
   // })
   // balance_updated_time: number;
 
-  @ApiProperty({
-    type: String,
-    description: 'models',
-  })
-  models: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'key',
-  })
-  key: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'group',
-  })
-  group: string;
-
-  @ApiProperty({
-    type: Array,
-    description: 'groups',
-  })
-  groups: string[];
-
   // @ApiProperty({
   //   type: Number,
   //   description: 'used_quota',
   // })
   // used_quota: number;
 
-  @ApiProperty({
-    type: String,
-    description: 'model_mapping',
-  })
-  model_mapping: string;
-
   // @ApiProperty({
   //   type: Number,
   //   description: 'priority',
   // })
   // priority: number;
-
-  @ApiProperty({
-    type: String,
-    description: 'proxy',
-  })
-  proxy: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'name',
-  })
-  name: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'test_model',
-  })
-  test_model: string;
-
-  @ApiProperty({
-    type: Boolean,
-    description: 'only_chat',
-  })
-  only_chat: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    description: 'is_edit',
-  })
-  is_edit: boolean;
-
-  @ApiProperty({
-    type: String,
-    description: 'plugin',
-  })
-  plugin: string;
-}
-
-export class EditTokenDto extends SaveTokenDto {
-
-  @ApiProperty({
-  type: Number,
-  description: 'id',
-  })
-  id: number;
-
-  @ApiProperty({
-    type: Number,
-    description: '状态',
-    default: 1,
-  })
-  status: number;
-
-  @ApiProperty({
-    type: Number,
-    description: '创建时间',
-  })
-  created_time: number;
-
-  @ApiProperty({
-    type: Number,
-    description: '测试时间',
-  })
-  test_time: number;
-
-  @ApiProperty({
-    type: Number,
-    description: '响应时间',
-  })
-  response_time: number;
-
-  @ApiProperty({
-    type: Number,
-    description: 'balance',
-  })
-  balance: number;
-
-  @ApiProperty({
-    type: Number,
-    description: 'balance_updated_time',
-  })
-  balance_updated_time: number;
-
-  @ApiProperty({
-    type: Number,
-    description: 'used_quota',
-  })
-  used_quota: number;
-
-  @ApiProperty({
-    type: Number,
-    description: 'priority',
-  })
-  priority: number;
 
 }
 /**

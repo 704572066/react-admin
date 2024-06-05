@@ -55,8 +55,8 @@ export class TokenService {
   ) {}
 
   /**
-   * @description: 获取角色管理列表
-   * @author: 白雾茫茫丶
+   * @description: 获取令牌管理列表
+   * @author: guj
    */
   async getTokenList(
     tokenInfo: ListTokenDto,
@@ -101,16 +101,16 @@ export class TokenService {
   }
 
   /**
-   * @description: 获取渠道
-   * @author: 白雾茫茫丶
+   * @description: 获取令牌
+   * @author: guj
    */
   async getToken(
     id: number,
   ): Promise<Response<Token>> {
     
     // const count = await this.channelModel.count();
-    const channel = await this.tokenModel.findByPk(id);
-    return responseMessage(channel);
+    const token = await this.tokenModel.findByPk(id);
+    return responseMessage(token);
   }
 
   //   /**
@@ -126,8 +126,8 @@ export class TokenService {
   //   }
 
   /**
-   * @description: 更新角色状态
-   * @author: 白雾茫茫丶
+   * @description: 更新令牌状态
+   * @author: guj
    */
   async updateTokenStatus(
     id: number,
@@ -142,7 +142,7 @@ export class TokenService {
     // 根据主键查找出当前数据
     const currentInfo = await this.tokenModel.findByPk(id);
     await this.operationLogsService.saveLogs(
-      `更新渠道[${currentInfo.name}]状态：${
+      `更新令牌[${currentInfo.name}]状态：${
         { 0: '禁用', 1: '正常' }[status]
       }`,
     );
@@ -151,7 +151,7 @@ export class TokenService {
 
 
   /**
-   * @description: 删除渠道
+   * @description: 删除令牌
    * @author: guj
    */
   async deleteToken(id: number): Promise<Response<number>> {

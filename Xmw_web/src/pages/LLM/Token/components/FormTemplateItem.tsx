@@ -6,27 +6,24 @@
  * @LastEditors: 白雾茫茫丶
  * @LastEditTime: 2023-09-22 14:43:45
  */
-import { ProFormDatePicker, ProFormDateTimePicker,ProFormDigit, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
+import { ProFormDateTimePicker,ProFormDigit, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max'
-import { useRequest } from 'ahooks'
-import { Alert, DatePicker, Switch, TreeSelect } from 'antd'
-import { get } from 'lodash-es'
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { ProFormDescribe, ProFormSort, ProFormStatus } from '@/components/CommonProForm'
-import { getMenuList } from '@/services/system/menu-management'
 import { formatPerfix } from '@/utils'
 import { INTERNATION, ROUTES } from '@/utils/enums'
 
 const FormTemplateItem: FC<{ values: any }> = ({values}) => {
-	// values.expired_time = -100
-	// const b:boolean = (values.expired_time >= 0) ? true : false
-	// alert('b '+b)
+
 	const [isVisible, setIsVisible] = useState<boolean>(values.expired_time >= 0);
-	// alert(isVisible)
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(values.unlimited_quota);
+
+	const [chatCacheEnabled] = useState<boolean>(false);
+
+
+
 
 	useEffect(() => {
     setIsVisible(values.expired_time >= 0);
@@ -36,16 +33,10 @@ const FormTemplateItem: FC<{ values: any }> = ({values}) => {
     setIsDisabled(values.unlimited_quota);
   }, [values.unlimited_quota]);
 	const { formatMessage } = useIntl();
-	/**
-	 * @description: 获取当前菜单数据
-	 * @author: 白雾茫茫丶
-	 */
-	const { data: menuData } = useRequest(async (params) => get(await getMenuList(params), 'data', []), {
-		defaultParams: [{ isPremission: true }],
-	})
+
 	return (
 		<>
-			{/* 角色名称 */}
+			{/* 名称 */}
 			<ProFormText
 				name="name"
 				colProps={{ span: 24 }}
@@ -74,16 +65,27 @@ const FormTemplateItem: FC<{ values: any }> = ({values}) => {
 			/>
 			{isVisible && <ProFormDateTimePicker fieldProps={{
           format: 'YYYY-MM-DD HH:mm:ss', // DatePicker 中显示的格式
-        }} convertValue={(value) => {
-          // 将 Unix 时间戳转换为 moment 对象以便显示在 DatePicker 中
-          // alert(dayjs.unix(value));
-					if(typeof value === 'number')
+        }} 
+				convertValue={(value) => {
+          // 将 Unix 时间戳转换为日期格式以便显示在 DatePicker 中
+					if(typeof value === 'number' && value >= 0)
 						return dayjs.unix(value);
 					return value;
-        }} name='expired_time' label="过期时间" width={'md'} />
+        }} 
+				name='expired_time' label="过期时间" width={'md'} 
+				transform={(value) => {
+          // 将日期格式转换为unix时间戳以便存储在数据库中
+          // alert(dayjs.unix(value));
+					if(typeof value === 'number')
+					// 	return dayjs.unix(value);
+					// alert(value)
+						return value;
+					return dayjs(value).unix();
+        }}/>
 			}
 			<ProFormSwitch fieldProps={{ checked:!isVisible,onChange: (value) => setIsVisible(!value)}} addonAfter="永不过期"/>
 			<ProFormDigit
+						
 						disabled={isDisabled}
             label="额度"
             name="remain_quota"
@@ -91,8 +93,14 @@ const FormTemplateItem: FC<{ values: any }> = ({values}) => {
             min={0}
 						fieldProps={{addonAfter:'（等价金额：$-0.00）'}}
           />
-			<ProFormSwitch name="unlimited_quota" fieldProps={{
+			<ProFormSwitch name="unlimited_quota" transform={(value) => {
+						return value ? true : false;
+        }}
+				fieldProps={{
 				onChange: (value) => setIsDisabled(value)}} addonAfter="无限额度"/>
+
+			{chatCacheEnabled && <ProFormSwitch name="chat_cache" addonAfter="是否开启缓存(开启后，将会缓存聊天记录，以减少消费)"/>}
+
 
 			
 		</>

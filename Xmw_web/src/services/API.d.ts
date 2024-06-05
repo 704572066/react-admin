@@ -239,9 +239,10 @@ declare global {
       accessed_time: number; // 电子邮箱
       expired_time: number; // 电话号码
       used_quota: number; // 详细地址
-      unlimited_quota: number; // 详细地址
+      unlimited_quota: boolean; // 详细地址
       remain_quota: number; // 详细地址
-      chat_cache: number;
+      chat_cache: boolean;
+      is_edit:boolean;
 
     }
 

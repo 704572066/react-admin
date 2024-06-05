@@ -70,13 +70,13 @@ export class TokenController {
   }
 
     /**
-   * @description: 获取渠道
+   * @description: 获取令牌
    * @author: guj
    */
     @UseGuards(AuthGuard('jwt'))
     @Get('/items/:id')
     @ApiOkResponse({ type: ResponseTokenDto })
-    @ApiOperation({ summary: '获取渠道' })
+    @ApiOperation({ summary: '获取令牌' })
     async getToken(@Param('id') id: number) {
       const response = await this.tokenService.getToken(id);
       return response;
@@ -84,32 +84,32 @@ export class TokenController {
 
    
   /**
-   * @description: 创建渠道
+   * @description: 创建令牌
    * @author: guj
    */
   @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiOkResponse({ type: ResponseTokenDto })
-  @ApiOperation({ summary: '创建渠道' })
-  async createChannel(
-    @Body() channelInfo: SaveTokenDto,
+  @ApiOperation({ summary: '创建令牌' })
+  async createToken(
+    @Body() tokenInfo: SaveTokenDto,
   ) {
-    const response = await this.httpService.post('/api/channel',channelInfo);
+    const response = await this.httpService.post('/api/token',tokenInfo);
     return response;
   }
 
   /**
-   * @description: 更新渠道
+   * @description: 更新令牌
    * @author: guj
    */
   @UseGuards(AuthGuard('jwt'))
   @Put()
   @ApiOkResponse({ type: UpdateResponseDto })
-  @ApiOperation({ summary: '更新角色数据' })
+  @ApiOperation({ summary: '更新令牌' })
   async updateToken(
-    @Body() channelInfo: EditTokenDto,
+    @Body() tokenInfo: EditTokenDto,
   ) {
-    const response = await this.httpService.put('/api/channel',channelInfo);
+    const response = await this.httpService.put('/api/token',tokenInfo);
     return response;
   }
 
@@ -120,7 +120,7 @@ export class TokenController {
   @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
   @ApiOkResponse({ type: DeleteResponseDto })
-  @ApiOperation({ summary: '删除渠道' })
+  @ApiOperation({ summary: '删除令牌' })
   async deleteToken(@Param('id') id: number) {
     const response = await this.tokenService.deleteToken(id);
     return response;
@@ -133,7 +133,7 @@ export class TokenController {
   @UseGuards(AuthGuard('jwt'))
   @Patch('/:id')
   @ApiOkResponse({ type: UpdateResponseDto })
-  @ApiOperation({ summary: '更新渠道状态' })
+  @ApiOperation({ summary: '更新令牌状态' })
   async updateTokenStatus(
     @Param('id') id: number,
     @Body() { status }: UpdateTokenStatusDto,

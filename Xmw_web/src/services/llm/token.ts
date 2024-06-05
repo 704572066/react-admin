@@ -14,7 +14,7 @@ import { httpRequest } from '@/utils/umiRequest'
 const baseURL = ROUTES.TOKEN
 
 /**
- * @description:  获取渠道列表
+ * @description:  获取令牌列表
  * @param {SearchParams} options
  * @Author: guj
  */
@@ -22,7 +22,7 @@ export const getTokenList = (options?: SearchParams) =>
   httpRequest.get<PageResponse<API.TOKEN>>(`${baseURL}`, options);
 
 /**
- * @description:  获取渠道
+ * @description:  获取令牌
  * @param {SearchParams} options
  * @Author: guj
  */
@@ -30,7 +30,7 @@ export const getToken = (id: number) =>
   httpRequest.get<API.TOKEN>(`${baseURL}/items/${id}`);
 
 /**
- * @description: 新增渠道
+ * @description: 新增令牌
  * @param {API.CHANNEL} options
  * @Author: guj
  */
@@ -39,7 +39,7 @@ export const createToken = (
 ) => httpRequest.post<API.TOKEN>(`${baseURL}`, options);
 
 /**
- * @description: 更新渠道
+ * @description: 更新令牌
  * @param {API.CHANNEL} options
  * @Author: guj
  */
@@ -47,14 +47,14 @@ export const updateToken = ({ id, ...options }: API.TOKEN) =>
   httpRequest.put<number[]>(`${baseURL}`, { id, ...options });
 
 /**
- * @description: 删除渠道
+ * @description: 删除令牌
  * @param {number} id
  * @Author: guj
  */
 export const delToken = (id: number) => httpRequest.delete<number>(`${baseURL}/${id}`);
 
 /**
- * @description: 设置渠道状态
+ * @description: 设置令牌状态
  * @param {Data} options
  * @Author: guj
  */

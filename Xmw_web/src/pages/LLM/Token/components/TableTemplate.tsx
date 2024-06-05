@@ -64,7 +64,7 @@ const TableTemplate: FC = () => {
 	}
 
 		/**
-	 * @description: 获取渠道列表
+	 * @description: 获取令牌列表
 	 * @author: guj
 	 */
 		const { runAsync: fetchTokenList } = useRequest(
