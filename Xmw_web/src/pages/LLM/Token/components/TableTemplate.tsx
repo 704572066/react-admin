@@ -33,7 +33,7 @@ import { delToken, getTokenList, setTokenStatus } from '@/services/llm/token' //
 import { formatPerfix, formatResponse } from '@/utils'
 import { IconFont } from '@/utils/const'
 import { INTERNATION, ROUTES,TOKEN_STATUS } from '@/utils/enums'
-import { renderQuota,timestamp2string } from '@/utils/oneapi/common'
+import { copy, renderQuota,timestamp2string } from '@/utils/oneapi/common'
 // import { timestamp2string } from '@/utils/oneapi/common';
 // import { CHANNEL_OPTIONS } from '@/utils/oneapi/constants/channel'
 import type { SearchParams,TokenStatusParams } from '@/utils/types/llm/token'
@@ -277,7 +277,12 @@ const TableTemplate: FC = () => {
 			...operationColumn,
 			render: (_, record) => (
 				<Space>
-				<Button type="primary">复制</Button>
+				<Button 
+					type="primary" 
+					size='small' 
+					onClick={() => {
+              copy(`sk-${record.key}`, '令牌');
+          }}>复制</Button>
 				<DropdownMenu
 					pathName={ROUTES.TOKEN}
 					editCallback={() => {

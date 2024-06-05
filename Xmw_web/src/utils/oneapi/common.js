@@ -1,3 +1,5 @@
+import { message } from 'antd';
+import { enqueueSnackbar } from 'notistack';
 export function renderNumber(num) {
   if (num >= 1000000000) {
     return (num / 1000000000).toFixed(1) + 'B';
@@ -97,3 +99,19 @@ export function trims(values) {
 
   return values;
 }
+// eslint-disable-next-line
+export function SnackbarHTMLContent({ htmlContent }) {
+  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+}
+
+export function copy(text, name = '') {
+  try {
+    navigator.clipboard.writeText(text);
+  } catch (error) {
+    text = `复制${name}失败，请手动复制：<br /><br />${text}`;
+    enqueueSnackbar(<SnackbarHTMLContent htmlContent={text} />, getSnackbarOptions('COPY'));
+    return;
+  }
+  message.success(`复制${name}成功！`);
+}
+
