@@ -8,9 +8,10 @@
  */
 import { ProFormDateTimePicker,ProFormDigit, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max'
+import dayjs from 'dayjs';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
+
 import { formatPerfix } from '@/utils'
 import { INTERNATION, ROUTES } from '@/utils/enums'
 

@@ -9,11 +9,11 @@
 
 import { ModalForm } from '@ant-design/pro-components';
 import { Alert, App, Form, Space } from 'antd';
-
+import dayjs from 'dayjs';
 import type { FC } from 'react';
+
 // import { useEffect,useState } from 'react';
 // import { FC, useEffect, useRef,useState } from 'react'
-
 import { renderFormTitle } from '@/components/TableColumns'
 import { createToken, updateToken } from '@/services/llm/token'
 import { isSuccess } from '@/utils'
@@ -21,7 +21,6 @@ import { ROUTES } from '@/utils/enums'
 import type { FormTemplateProps } from '@/utils/types/system/role-management'
 
 import FormTemplateItem from './FormTemplateItem' // 表单组件 
-import dayjs from 'dayjs';
 
 const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerFalse }) => {
 	// hooks 调用
@@ -81,7 +80,7 @@ const FormTemplate: FC<FormTemplateProps> = ({ reloadTable, open, setOpenDrawerF
 			<Space direction="vertical" style={{
       width: '100%',
     }}>
-				<Alert style={{ width:'100%'
+				<Alert style={{ width:'100%',
 }} showIcon closable message="" description={'注意，令牌的额度仅用于限制令牌本身的最大额度使用量，实际的使用受到账户的剩余额度限制。'}
 	type="info" /> 
 {/* 角色名称 */}

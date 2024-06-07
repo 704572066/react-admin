@@ -71,6 +71,11 @@ export default {
       edit: 'llm:token:edit', // 编辑
       delete: 'llm:token:delete', // 删除
     },
+     // 令牌管理
+    'register': {
+
+    },
+    
   },
 
 }

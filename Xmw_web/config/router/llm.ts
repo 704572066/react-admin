@@ -31,6 +31,13 @@ export default {
       access: 'adminRouteFilter',
       exact: true,
     },
+    {
+      path: '/llm/register',
+      name: 'register',
+      component: './LLM/Register',
+      access: 'adminRouteFilter',
+      exact: true,
+    },
     // {
     //   path: '/ai-console/gpt-app-management',
     //   name: 'gpt-app-management',

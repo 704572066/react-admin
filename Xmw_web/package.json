@@ -77,6 +77,7 @@
     "rc-menu": "^9.12.2",
     "react": "^18.2.0",
     "react-quill": "^2.0.0",
+    "vanilla-jsoneditor": "^0.23.7",
     "yup": "^0.32.11",
     "zxcvbn": "^4.4.2"
   },

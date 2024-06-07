@@ -17,3 +17,5 @@ declare module 'lodash-es';
 declare module '@/utils/oneapi/constants/channel';
 declare module '@/utils/oneapi/common';
 declare module '@/components/oneapi/ResponseTimeLabel';
+// declare module 'sonner';
+// declare module 'react18-json-view';
