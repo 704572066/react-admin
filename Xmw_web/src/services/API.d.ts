@@ -246,6 +246,14 @@ declare global {
 
     }
 
+    type REGISTER = {
+      id: string; // id
+      type: string; // 用户工号
+      value: object; // 中文名
+      createTime: Date;
+      version: string;
+    }
+
   
   }
 

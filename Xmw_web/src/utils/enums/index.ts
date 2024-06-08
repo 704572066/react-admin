@@ -65,6 +65,7 @@ export enum ROUTES {
   GPTDATASETMANAGEMENT = '/ai-console/gpt-dataset-management', // gpt-应用管理
   CHANNEL = '/llm/channel',
   TOKEN = '/llm/token',
+  REGISTER = '/llm/register',
 }
 
 /**

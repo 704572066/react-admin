@@ -85,6 +85,14 @@ model datasets {
   version Int?  @map("__v")
 }
 
+model systemconfigs {
+  id String  @id @default(auto()) @map("_id") @db.ObjectId
+  type       String
+  value      Json
+  createTime DateTime @default(now())
+  version Int?  @map("__v")
+}
+
 type OpenaiAccount {
   key String
   baseUrl String

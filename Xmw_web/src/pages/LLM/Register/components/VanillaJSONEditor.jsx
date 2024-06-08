@@ -1,6 +1,7 @@
 import { JSONEditor } from "vanilla-jsoneditor";
 import { useEffect, useRef } from "react";
 import "./VanillaJSONEditor.css";
+import "./dark.css";
 
 export default function SvelteJSONEditor(props) {
   const refContainer = useRef(null);
@@ -11,7 +12,7 @@ export default function SvelteJSONEditor(props) {
     console.log("create editor", refContainer.current);
     refEditor.current = new JSONEditor({
       target: refContainer.current,
-      props: {}
+      props: {},
     });
 
     return () => {
@@ -32,5 +33,5 @@ export default function SvelteJSONEditor(props) {
     }
   }, [props]);
 
-  return <div style={{ height: 'calc(100vh - 150px)' }} className="vanilla-jsoneditor-react" ref={refContainer}></div>;
+  return <div style={{ height: 'calc(100vh - 300px)' }} className="jsonedit-container jse-theme-dark" ref={refContainer}></div>;
 }
