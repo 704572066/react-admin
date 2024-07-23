@@ -47,13 +47,13 @@ export class XmwPermission
   menu_id: string;
 
   //菜单状态
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-    comment: '菜单状态（0:不过滤，1：过滤）',
-  })
-  menu_check: number;
+  // @Column({
+  //   type: DataType.INTEGER,
+  //   allowNull: false,
+  //   defaultValue: 0,
+  //   comment: '菜单状态（0:不过滤，1：过滤）',
+  // })
+  // menu_check: number;
 
 
   @BelongsTo(() => XmwRole)

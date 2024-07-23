@@ -24,10 +24,10 @@ export class UpdateRegisterDto {
   id: string;
 
   @ApiProperty({
-    type: String,
+    type: Object,
     description: 'value',
   })
-  value: string;
+  value: object;
 
 
 }

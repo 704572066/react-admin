@@ -86,9 +86,9 @@ export class RoleManagementService {
         {
           model: XmwPermission,
           as: 'menu_permission',
-          where: {
-            menu_check: 0
-          }
+          // where: {
+          //   menu_check: 0
+          // }
         },
       ],
       offset: (Number(current) - 1) * pageSize,
